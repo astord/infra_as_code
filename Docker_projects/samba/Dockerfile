@@ -12,7 +12,7 @@ FROM alpine:latest
 RUN apk --no-cache upgrade && apk --no-cache add samba samba-common-tools
 
 # create a dir for the config and the share
-RUN mkdir /config /shared
+RUN mkdir /config /shared1 /shared2
 
 # copy config files from project folder to get a default config going for samba and supervisord
 COPY *.conf /config/

@@ -7,7 +7,7 @@ Other similar projects:
 
 ---
 
-TEMP
+<details><summary>Some example smb.conf</summary>
 
 ```
 /etc/samba/smb.conf
@@ -36,9 +36,29 @@ TEMP
   writable = yes
   guest ok = yes
 EOF
+```
 
+</details>
 
+# Default network via port mapping:
 
-docker run -d --rm -it -p 445:445/tcp -v /var/lib/docker/temp_projects/samba:/config -v /srv:/shared --name samba smb
+```
 docker run -d --rm -it -p 135:135/tcp -p 137:137/udp -p 138:138/udp -p 139:139/tcp -p 445:445/tcp -v /var/lib/docker/temp_projects/samba:/config -v /srv:/shared --name samba smb
+```
+
+# ipvlan netowork
+
+```
+#Create the network (if doesn't exists):
+docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
+#Run the container from the image:
+docker run -d -it\
+ --network docker_ipvlan\
+ --ip 10.0.0.20\
+ -v /infra/git/infra_as_code/Docker_projects/samba:/config\
+ -v /data/ol_storage/HDD400:/shared1\
+ -v /srv:/shared2\
+ --name samba\
+ --restart=always\
+ smb:2.0
 ```
