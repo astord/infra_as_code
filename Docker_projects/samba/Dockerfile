@@ -18,7 +18,7 @@ RUN mkdir /config /shared1 /shared2
 COPY *.conf /config/
 
 # volume mappings
-VOLUME ["/config", "/shared"]
+VOLUME ["/config", "/shared1", "/shared2"]
 
 # exposes samba's default ports (135 for End Point Mapper [DCE/RPC Locator Service],
 # 137, 138 for nmbd and 139, 445 for smbd)
