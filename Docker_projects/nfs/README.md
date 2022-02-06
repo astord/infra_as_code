@@ -1,0 +1,33 @@
+# https://github.com/ehough/docker-nfs-server
+
+```
+docker build -t nfs .
+```
+
+```
+#Create the network (if doesn't exists):
+docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
+#Run the container:
+docker run -d \
+  --network docker_ipvlan \
+  --ip 10.0.0.19 \
+  -v /data/ol_storage/HDD400:/ol                                               \
+  -v /srv:/shared2                                                             \
+  -v /infra/git/infra_as_code/Docker_projects/nfs/exports.file:/etc/exports:ro \
+  -v /lib/modules:/lib/modules:ro \
+  --privileged \
+  -p 2049:2049                      \
+  -p 111:111     -p 111:111/udp     \
+  -p 32765:32765 -p 32765:32765/udp \
+  -p 32767:32767 -p 32767:32767/udp \
+  --name nfs \
+  --restart=always\
+  nfs:latest
+```
+
+Unable to bring the container up with (used `--privileged` isnted):
+
+```
+  --cap-add SYS_ADMIN  \
+  --cap-add SYS_MODULE \
+```
