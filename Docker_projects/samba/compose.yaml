@@ -1,0 +1,18 @@
+name: "samba" #Compose project name.
+services:
+  smb:        #container name
+    image: smb:2.0
+    build: .
+    restart: always
+    volumes:
+      - /infra/git/infra_as_code/Docker_projects/samba:/config
+      - /data/ol_storage/HDD400:/shared1
+      - /srv:/shared2
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.0.0.20
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true

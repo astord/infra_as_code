@@ -1,0 +1,17 @@
+name: "test-project" #Compose project name.
+services:
+  test1-web:
+    #image: nginx
+    build: .
+    restart: always
+    volumes:
+      - /srv:/home #host-path:container-path
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.0.0.44
+    #privileged: true
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
