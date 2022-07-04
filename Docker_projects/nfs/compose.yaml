@@ -1,0 +1,19 @@
+name: "nfs" #Compose project name.
+services:
+  docker:        #container name
+    image: nfs:latest
+    build: .
+    restart: always
+    volumes:
+      - /data/ol_storage/HDD400:/ol
+      - /srv:/shared2
+      - /infra/git/infra_as_code/Docker_projects/nfs/exports.file:/etc/exports:ro
+      - /lib/modules:/lib/modules:ro
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.0.0.44
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
