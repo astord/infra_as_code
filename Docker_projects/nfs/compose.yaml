@@ -12,7 +12,7 @@ services:
       - /lib/modules:/lib/modules:ro
     networks:
       docker_ipvlan:
-        ipv4_address: 10.0.0.44
+        ipv4_address: 10.0.0.23
 networks:
   docker_ipvlan:
     driver: ipvlan
