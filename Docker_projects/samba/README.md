@@ -50,6 +50,20 @@ You MUST create the network (if doesn't exsists) before to bring up the containe
 docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
 ```
 
+# Updates/Patching
+
+`vX.Y` bellow is the incremented version of the `latest` image.
+
+```
+#Tag the old image:
+docker tag smb:latest smb:vX.0
+#Build new `latest` image
+docker build --no-cache -t smb:latest .
+#Replace the running container
+docker compose down
+docker compose up -d
+```
+
 # Bring UP via docker commands (legacy) 
 
 <details><summary>Legaxy docker run commands</summary>

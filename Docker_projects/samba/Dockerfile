@@ -25,4 +25,4 @@ VOLUME ["/config", "/shared1", "/shared2"]
 EXPOSE 135/tcp 137/udp 138/udp 139/tcp 445/tcp
 #EXPOSE 445/tcp
 
-ENTRYPOINT ["smbd", "-FS", "--no-process-group", "-s", "/config/smb.conf"]
+ENTRYPOINT ["smbd", "-F", "--debug-stdout", "--no-process-group", "-s", "/config/smb.conf"]
