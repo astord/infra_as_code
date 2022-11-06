@@ -4,6 +4,7 @@ services:
     image: nfs:latest
     build: .
     restart: always
+    privileged: true
     volumes:
       - /data/ol_storage/HDD400:/ol
       - /srv:/shared2
