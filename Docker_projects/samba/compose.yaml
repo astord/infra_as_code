@@ -1,7 +1,7 @@
 name: "samba" #Compose project name.
 services:
   smb:        #container name
-    image: smb:2.0
+    image: smb:latest
     build: .
     restart: always
     volumes:
