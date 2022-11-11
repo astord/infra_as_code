@@ -57,8 +57,8 @@ docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o paren
 ```
 #Tag the old image:
 docker tag smb:latest smb:vX.0
-#Build new `latest` image
-docker build --no-cache -t smb:latest .
+#Build new `latest` image. The same as `docker build --no-cache -t smb:latest .`
+docker compose build --no-cache
 #Replace the running container
 docker compose down
 docker compose up -d
