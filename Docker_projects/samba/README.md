@@ -47,7 +47,7 @@ You MUST create the network (if doesn't exsists) before to bring up the containe
 
 ```
 #Create the network (if doesn't exists):
-docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
+docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o parent=enp1s0 docker_ipvlan
 ```
 
 # Updates/Patching
@@ -80,7 +80,7 @@ docker run -d --rm -it -p 135:135/tcp -p 137:137/udp -p 138:138/udp -p 139:139/t
 #Run the container from the image:
 docker run -d -it\
  --network docker_ipvlan\
- --ip 10.0.0.20\
+ --ip 10.1.0.20\
  -v /infra/git/infra_as_code/Docker_projects/samba:/config\
  -v /data/ol_storage/HDD400:/shared1\
  -v /srv:/shared2\

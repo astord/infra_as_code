@@ -6,7 +6,7 @@ You MUST create the network (if doesn't exsists) before to bring up the containe
 
 ```
 #Create the network (if doesn't exists):
-docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
+docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o parent=enp1s0 docker_ipvlan
 ```
 
 # Updates/Patching
@@ -33,11 +33,11 @@ docker build -t nfs .
 
 ```
 #Create the network (if doesn't exists):
-docker network create -d ipvlan --subnet 10.0.0.0/24 --gateway 10.0.0.1 -o parent=enp1s0 docker_ipvlan
+docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o parent=enp1s0 docker_ipvlan
 #Run the container:
 docker run -d \
   --network docker_ipvlan \
-  --ip 10.0.0.19 \
+  --ip 10.1.0.19 \
   -v /data/ol_storage/HDD400:/ol                                               \
   -v /srv:/shared2                                                             \
   -v /infra/git/infra_as_code/Docker_projects/nfs/exports.file:/etc/exports:ro \

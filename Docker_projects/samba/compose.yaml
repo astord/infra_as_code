@@ -10,7 +10,7 @@ services:
       - /srv:/shared2
     networks:
       docker_ipvlan:
-        ipv4_address: 10.0.0.20
+        ipv4_address: 10.1.0.20
 networks:
   docker_ipvlan:
     driver: ipvlan
