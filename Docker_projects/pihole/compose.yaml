@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole:latest
+    build: .
+    environment:
+      TZ: 'Europe/Sofia'
+      WEBPASSWORD: # put the value is in `.env` file
+      VIRTUAL_HOST: 'pihole'
+      REV_SERVER: true
+      REV_SERVER_DOMAIN: 'ast'      # forward DNS for '.ast' domain
+      REV_SERVER_TARGET: '10.1.0.1' # forward DNS to the router IP
+      REV_SERVER_CIDR: '10.1.0.0/24'
+    # Volumes store your data between container upgrades
+    volumes:
+      - './etc-pihole/custom.list:/etc/pihole/custom.list'
+    restart: unless-stopped
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.11
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
