@@ -1,0 +1,62 @@
+#https://github.com/stefanprodan/dockprom/blob/master/docker-compose.yml
+#https://github.com/prometheus/prometheus/blob/main/Dockerfile
+#https://github.com/geerlingguy/internet-pi/blob/master/templates/docker-compose.yml.j2
+#https://grafana.com/grafana/dashboards/893-main/
+name: "rpi_sensors" #Compose project name.
+services:
+  prom:        #container name
+    image: prom/prometheus
+    #build: .
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - time_db:/prometheus
+    ports:
+      - 9090:9090
+    dns: 10.1.0.11
+    dns_search: ast
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.24
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--storage.tsdb.retention.time=1y'
+  #alertmanager:
+  #nodeexporter:
+  #cadvisor:
+  grafana: #container name
+    depends_on:
+      - prom
+    image: grafana/grafana
+    restart: always
+    volumes:
+    #  - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    #environment:
+    #  - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+    #  - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+    #  - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    dns: 10.1.0.11
+    dns_search: ast
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.25
+    #env_file:
+    #  - ./grafana/config.monitoring
+  #pushgateway:
+  #caddy:
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
+volumes:
+  time_db:
+    external: true

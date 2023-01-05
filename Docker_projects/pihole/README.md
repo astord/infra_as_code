@@ -31,3 +31,10 @@ docker compose up -d
 docker rmi pihole/pihole
 ```
 
+# Remove
+
+To stop/destroy the project and deleta all images build:
+
+```
+docker compose down --rmi all
+```

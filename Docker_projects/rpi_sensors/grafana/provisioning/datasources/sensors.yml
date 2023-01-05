@@ -1,0 +1,10 @@
+datasources:
+  - name: prom-data
+    type: prometheus
+    url: http://prom.ast:9090
+    user: ""
+    jsonData:
+      httpMethod: POST
+      manageAlerts: false
+      queryTimeout: 60s
+      timeInterval: 60s
