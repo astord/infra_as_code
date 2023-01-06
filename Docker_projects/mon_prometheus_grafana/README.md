@@ -18,16 +18,17 @@ docker volume create time_db_2y
 docker volume create time_db_1m
 ```
 
-### Updates/Upgrades
+## Grafana
+
+## Updates/Upgrades
 
 ```
 cd <project_dir>
 docker tag prom/prometheus:latest prom/prometheus:vX.0 # tag the old image in case of revert is needed
+docker tag grafana/grafana:latest grafana/grafana:vX.0 # tag the old image in case of revert is needed
 docker compose pull                                    # pulls the latest images
 docker compose up -d --no-deps                         # restarts containers with newer images
 ```
-
-## Grafana
 
 ## Remove
 

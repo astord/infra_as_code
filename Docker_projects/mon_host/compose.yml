@@ -1,0 +1,47 @@
+#https://grafana.com/docs/grafana-cloud/quickstart/docker-compose-linux/
+name: "mon-host" #Compose project name.
+services:
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    dns: 10.1.0.11
+    dns_search: ast
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.8
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.0 # use the latest release version from https://github.com/google/cadvisor/releases
+    container_name: cadvisor
+    restart: unless-stopped
+    devices:
+      - "/dev/kmsg:/dev/kmsg"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    dns: 10.1.0.11
+    dns_search: ast
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.7
+
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
