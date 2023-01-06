@@ -23,14 +23,14 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 2,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P50A18F3948AD9217"
+        "uid": "prom-2y-data"
       },
       "fieldConfig": {
         "defaults": {
@@ -153,7 +153,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-2y-data"
           },
           "editorMode": "code",
           "expr": "rpi_temperature{group=\"sensors\"}",
@@ -169,7 +169,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P50A18F3948AD9217"
+        "uid": "prom-2y-data"
       },
       "fieldConfig": {
         "defaults": {
@@ -292,7 +292,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-2y-data"
           },
           "editorMode": "builder",
           "expr": "rpi_humidity",
@@ -309,7 +309,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P50A18F3948AD9217"
+        "uid": "prom-2y-data"
       },
       "fieldConfig": {
         "defaults": {
@@ -409,7 +409,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-2y-data"
           },
           "editorMode": "builder",
           "exemplar": false,

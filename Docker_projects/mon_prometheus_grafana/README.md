@@ -12,7 +12,10 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 For using prometheus storage on a docker volume create the volume if doesn't exeist:
 
 ```
-docker volume create time_db
+#prom-2y storage
+docker volume create time_db_2y
+#prom-1m storage
+docker volume create time_db_1m
 ```
 
 ### Updates/Upgrades

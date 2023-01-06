@@ -47,7 +47,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Time since last boot",
           "fieldConfig": {
@@ -114,7 +114,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_time_seconds{instance=~\"$host\"} - node_boot_time_seconds{instance=~\"$host\"}",
               "format": "time_series",
@@ -131,7 +131,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Number of processors",
           "fieldConfig": {
@@ -198,7 +198,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "count(count(node_cpu_seconds_total{instance=~\"$host\"}) by (cpu))",
               "format": "time_series",
@@ -213,7 +213,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Amount of memory",
           "fieldConfig": {
@@ -280,7 +280,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_memory_MemTotal_bytes{instance=~\"$host\"}",
               "format": "time_series",
@@ -296,7 +296,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fieldConfig": {
             "defaults": {
@@ -366,7 +366,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "1 - avg(irate(node_cpu_seconds_total{mode=\"idle\",instance=~\"$host\"}[5m]))",
               "format": "time_series",
@@ -382,7 +382,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fieldConfig": {
             "defaults": {
@@ -452,7 +452,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "editorMode": "code",
               "expr": "1 - node_memory_MemAvailable_bytes{instance=~\"$host\"} / node_memory_MemTotal_bytes{instance=~\"$host\"}",
@@ -469,7 +469,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Free diskspace",
           "fieldConfig": {
@@ -541,7 +541,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "editorMode": "code",
               "expr": "1 - (sum(node_filesystem_free_bytes{instance=~\"$host\"}) / sum(node_filesystem_size_bytes{instance=~\"$host\"}))",
@@ -558,7 +558,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Network traffic in the last hour",
           "fieldConfig": {
@@ -625,7 +625,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "sum(increase(node_network_receive_bytes_total{instance=~\"$host\"}[24h]))",
               "format": "time_series",
@@ -640,7 +640,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "description": "Network traffic in the last hour",
           "fieldConfig": {
@@ -707,7 +707,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "sum(increase(node_network_transmit_bytes_total{instance=~\"$host\"}[24h]))",
               "format": "time_series",
@@ -723,7 +723,7 @@
           "columns": [],
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fontSize": "100%",
           "gridPos": {
@@ -810,7 +810,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_filesystem_free_bytes{fstype!~\"(tmpfs|rootfs).*\",instance=~\"$host\"}",
               "format": "table",
@@ -858,7 +858,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -905,7 +905,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "sum by (mode) (irate(node_cpu_seconds_total{instance=~\"$host\"}[5m]))",
               "format": "time_series",
@@ -981,7 +981,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -1026,7 +1026,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_memory_MemFree_bytes{instance=~\"$host\"} > 0",
               "format": "time_series",
@@ -1038,7 +1038,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_memory_MemTotal_bytes{instance=~\"$host\"} > 0",
               "format": "time_series",
@@ -1050,7 +1050,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "node_memory_MemAvailable_bytes{instance=~\"$host\"} > 0",
               "format": "time_series",
@@ -1126,7 +1126,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 2,
           "fillGradient": 0,
@@ -1173,7 +1173,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "irate(node_network_receive_bytes_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m])  > 0",
               "format": "time_series",
@@ -1185,7 +1185,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "- irate(node_network_transmit_bytes_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m]) < 0",
               "format": "time_series",
@@ -1233,7 +1233,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 2,
           "fillGradient": 0,
@@ -1280,7 +1280,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "irate(node_network_receive_errs_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m]) + irate(node_network_receive_drop_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m])",
               "format": "time_series",
@@ -1292,7 +1292,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "- (irate(node_network_transmit_errs_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m]) + irate(node_network_transmit_drop_total{instance=~\"$host\",device=~\"(?i)^(ens|eth).+$\"}[5m]))",
               "format": "time_series",
@@ -1370,7 +1370,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fieldConfig": {
             "defaults": {
@@ -1421,7 +1421,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "editorMode": "code",
               "expr": "100 - (node_filesystem_avail_bytes{instance=~\"$host\",fstype!~\"(tmpfs|rootfs)\"}/node_filesystem_size_bytes{instance=~\"$host\",fstype!~\"(tmpfs|rootfs)\"} * 100)",
@@ -1471,7 +1471,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -1518,7 +1518,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "irate(node_disk_read_bytes_total{instance=~\"$host\"}[5m]) > 0",
               "format": "time_series",
@@ -1531,7 +1531,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "- irate(node_disk_written_bytes_total{instance=~\"$host\"}[5m]) < 0",
               "format": "time_series",
@@ -1578,7 +1578,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "P50A18F3948AD9217"
+            "uid": "prom-1m-data"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -1623,7 +1623,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "irate(node_disk_read_time_seconds_total{instance=~\"$host\"}[5m]) > 0",
               "format": "time_series",
@@ -1634,7 +1634,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P50A18F3948AD9217"
+                "uid": "prom-1m-data"
               },
               "expr": "- irate(node_disk_write_time_seconds_total{instance=~\"$host\"}[5m]) < 0",
               "format": "time_series",
@@ -1701,7 +1701,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P50A18F3948AD9217"
+          "uid": "prom-1m-data"
         },
         "definition": "label_values(node_time_seconds{job=\"$job\"},instance)",
         "hide": 0,
@@ -1731,7 +1731,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P50A18F3948AD9217"
+          "uid": "prom-1m-data"
         },
         "definition": "label_values(node_boot_time_seconds,job)",
         "hide": 0,

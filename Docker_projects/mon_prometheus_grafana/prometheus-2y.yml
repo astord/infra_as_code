@@ -28,17 +28,6 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-  - job_name: 'debhol-host'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 1m
-    metrics_path: '/metrics'
-
-    static_configs:
-      - targets: ['debhol-metrics.ast:9100']
-        labels:
-          group: 'debhol-host'
-
   - job_name: 'rpi_sensors'
 
     # Override the global default and scrape targets from this job every 5 seconds.

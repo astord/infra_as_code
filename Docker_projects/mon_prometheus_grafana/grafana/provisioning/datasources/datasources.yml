@@ -1,0 +1,21 @@
+datasources:
+  - name: prom-2y-data
+    uid: prom-2y-data
+    type: prometheus
+    url: http://prom-2y.ast:9090
+    user: ""
+    jsonData:
+      httpMethod: POST
+      manageAlerts: false
+      queryTimeout: 60s
+      timeInterval: 60s
+  - name: prom-1m-data
+    uid: prom-1m-data
+    type: prometheus
+    url: http://prom-1m.ast:9090
+    user: ""
+    jsonData:
+      httpMethod: POST
+      manageAlerts: false
+      queryTimeout: 60s
+      timeInterval: 60s

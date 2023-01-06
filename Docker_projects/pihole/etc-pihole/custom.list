@@ -1,5 +1,6 @@
 10.1.0.11 pihole.ast
 10.1.0.20 ol-storage.ast
-10.1.0.24 prom.ast
-10.1.0.25 grafana.ast
+10.1.0.24 grafana.ast
+10.1.0.25 prom-2y.ast
+10.1.0.26 prom-1m.ast
 10.1.0.8 debhol-metrics.ast
