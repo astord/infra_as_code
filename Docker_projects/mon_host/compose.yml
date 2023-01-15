@@ -3,7 +3,7 @@ name: "mon-host" #Compose project name.
 services:
   node-exporter:
     image: prom/node-exporter:latest
-    container_name: node-exporter
+    container_name: monitoring-node-exporter
     restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
@@ -23,7 +23,7 @@ services:
         ipv4_address: 10.1.0.8
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.0 # use the latest release version from https://github.com/google/cadvisor/releases
-    container_name: cadvisor
+    container_name: monitoring-cadvisor
     restart: unless-stopped
     devices:
       - "/dev/kmsg:/dev/kmsg"

@@ -35,6 +35,6 @@ scrape_configs:
     metrics_path: '/metrics'
 
     static_configs:
-      - targets: ['debhol-metrics.ast:9100']
+      - targets: ['debhol-metrics.ast:9100', 'debhol-cadvisor.ast:8080']
         labels:
           group: 'debhol-host'

@@ -133,6 +133,7 @@
         "y": 0
       },
       "id": 2,
+      "interval": "1m",
       "options": {
         "legend": {
           "calcs": [
@@ -156,7 +157,7 @@
             "uid": "prom-2y-data"
           },
           "editorMode": "code",
-          "expr": "rpi_temperature{group=\"sensors\"}",
+          "expr": "avg_over_time(rpi_temperature{group=\"sensors\"}[$__interval])",
           "format": "table",
           "legendFormat": "__auto",
           "range": true,
@@ -272,6 +273,7 @@
         "y": 0
       },
       "id": 3,
+      "interval": "1m",
       "options": {
         "legend": {
           "calcs": [
@@ -295,7 +297,7 @@
             "uid": "prom-2y-data"
           },
           "editorMode": "builder",
-          "expr": "rpi_humidity",
+          "expr": "avg_over_time(rpi_humidity[$__interval])",
           "format": "table",
           "hide": false,
           "legendFormat": "__auto",
@@ -389,6 +391,7 @@
         "y": 9
       },
       "id": 4,
+      "interval": "1m",
       "options": {
         "legend": {
           "calcs": [
@@ -413,7 +416,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "rpi_co2",
+          "expr": "avg_over_time(rpi_co2[$__interval])",
           "format": "table",
           "hide": false,
           "instant": false,
