@@ -1,0 +1,11 @@
+route:
+    receiver: 'aws_sns_topic'
+
+receivers:
+  - name: 'aws_sns_topic'
+    sns_configs:
+      - topic_arn: 'arn:aws:sns:eu-central-1:324151871311:eu_central_1_monitoring_notifications'
+        subject: 'Alertnamager notification'
+        attributes:
+           key: somekey
+           value: somevalue

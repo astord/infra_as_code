@@ -26,6 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 10180,
   "graphTooltip": 1,
+  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -736,7 +737,7 @@
       "type": "gauge"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": {
         "type": "datasource",
         "uid": "grafana"
@@ -748,7 +749,401 @@
         "y": 5
       },
       "id": 26,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prom-1m-data"
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 22
+          },
+          "hiddenSeries": false,
+          "id": 14,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": true,
+          "pluginVersion": "9.3.2",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "host",
+          "repeatDirection": "v",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prom-1m-data"
+              },
+              "expr": "sum by (mode) (irate(node_cpu_seconds_total{instance=~\"$host\"}[5m]))",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{mode}}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "CPU Load | $host",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "short",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P0F004AB920DC4FC3"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 14,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 28
+          },
+          "id": 5,
+          "links": [],
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(rate(container_cpu_system_seconds_total[1m]))",
+              "format": "time_series",
+              "hide": true,
+              "instant": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "a",
+              "range": true,
+              "refId": "B",
+              "step": 120
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m]))",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "nur container",
+              "refId": "F",
+              "step": 10
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "expr": "sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m]))",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "nur docker host",
+              "metric": "",
+              "refId": "A",
+              "step": 20
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "CPU Utilization %",
+              "metric": "",
+              "range": true,
+              "refId": "C",
+              "step": 600
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m])) + sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m])) + sum(rate(process_cpu_seconds_total[1m]))",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "D",
+              "step": 120
+            }
+          ],
+          "title": "CPU Usage",
+          "type": "timeseries"
+        },
+        {
+          "alert": {
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    1.25
+                  ],
+                  "type": "gt"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "alerting",
+            "frequency": "60s",
+            "handler": 1,
+            "name": "Panel Title alert",
+            "noDataState": "keep_state",
+            "notifications": [
+              {
+                "id": 1
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P0F004AB920DC4FC3"
+          },
+          "decimals": 0,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 8,
+            "y": 28
+          },
+          "hiddenSeries": false,
+          "id": 28,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "9.3.2",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P0F004AB920DC4FC3"
+              },
+              "editorMode": "code",
+              "expr": "node_load1{instance=~\"$host\"} / on() group_right() count by(job, instance)(count by(job, instance, cpu)(node_cpu_seconds_total{instance=~\"$host\"}))",
+              "intervalFactor": 2,
+              "range": true,
+              "refId": "A",
+              "step": 600
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 1.25
+            }
+          ],
+          "timeRegions": [],
+          "title": "Load",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": false,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "logBase": 1,
+              "max": "1.50",
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        }
+      ],
       "targets": [
         {
           "datasource": {
@@ -762,497 +1157,6 @@
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prom-1m-data"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 6
-      },
-      "hiddenSeries": false,
-      "id": 14,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "current",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": true,
-      "pluginVersion": "9.3.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeat": "host",
-      "repeatDirection": "v",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prom-1m-data"
-          },
-          "expr": "sum by (mode) (irate(node_cpu_seconds_total{instance=~\"$host\"}[5m]))",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{mode}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "CPU Load | $host",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 1,
-          "format": "short",
-          "logBase": 1,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P0F004AB920DC4FC3"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 14,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 12
-      },
-      "id": 5,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(container_cpu_system_seconds_total[1m]))",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "a",
-          "range": true,
-          "refId": "B",
-          "step": 120
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m]))",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "nur container",
-          "refId": "F",
-          "step": 10
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "expr": "sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m]))",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "nur docker host",
-          "metric": "",
-          "refId": "A",
-          "step": 20
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "CPU Utilization %",
-          "metric": "",
-          "range": true,
-          "refId": "C",
-          "step": 600
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m])) + sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m])) + sum(rate(process_cpu_seconds_total[1m]))",
-          "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "",
-          "refId": "D",
-          "step": 120
-        }
-      ],
-      "title": "CPU Usage",
-      "type": "timeseries"
-    },
-    {
-      "alert": {
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1.25
-              ],
-              "type": "gt"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "frequency": "60s",
-        "handler": 1,
-        "name": "Panel Title alert",
-        "noDataState": "keep_state",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P0F004AB920DC4FC3"
-      },
-      "decimals": 0,
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 8,
-        "y": 12
-      },
-      "hiddenSeries": false,
-      "id": 28,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "9.3.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "editorMode": "code",
-          "expr": "node_load1{instance=~\"$host\"} / on() group_right() count by(job, instance)(count by(job, instance, cpu)(node_cpu_seconds_total{instance=~\"$host\"}))",
-          "intervalFactor": 2,
-          "range": true,
-          "refId": "A",
-          "step": 600
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 1.25
-        }
-      ],
-      "timeRegions": [],
-      "title": "Load",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": false,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "logBase": 1,
-          "max": "1.50",
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P0F004AB920DC4FC3"
-      },
-      "editable": true,
-      "error": false,
-      "fill": 5,
-      "fillGradient": 0,
-      "grid": {},
-      "gridPos": {
-        "h": 7,
-        "w": 15,
-        "x": 0,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 1,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "9.3.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P0F004AB920DC4FC3"
-          },
-          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[$interval])) by (name) * 100",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{name}}",
-          "metric": "",
-          "refId": "F",
-          "step": 240
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "CPU Usage per Container",
-      "tooltip": {
-        "msResolution": true,
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percent",
-          "label": "",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
       "collapsed": true,
       "datasource": {
         "type": "datasource",
@@ -1262,7 +1166,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 6
       },
       "id": 24,
       "panels": [
@@ -1281,7 +1185,7 @@
             "h": 5,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 7
           },
           "hiddenSeries": false,
           "id": 16,
@@ -1402,7 +1306,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 20
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 10,
@@ -1509,7 +1413,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 20
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 34,
@@ -1621,7 +1525,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 7
       },
       "id": 28,
       "panels": [
@@ -1640,7 +1544,7 @@
             "h": 6,
             "w": 15,
             "x": 0,
-            "y": 32
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 18,
@@ -1747,7 +1651,7 @@
             "h": 6,
             "w": 9,
             "x": 15,
-            "y": 32
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 43,
@@ -1931,7 +1835,7 @@
             "h": 10,
             "w": 9,
             "x": 0,
-            "y": 38
+            "y": 30
           },
           "id": 19,
           "links": [],
@@ -2040,7 +1944,7 @@
             "h": 10,
             "w": 15,
             "x": 9,
-            "y": 38
+            "y": 30
           },
           "id": 45,
           "options": {
@@ -2111,7 +2015,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 8
       },
       "id": 22,
       "panels": [
@@ -2136,7 +2040,7 @@
             "h": 7,
             "w": 9,
             "x": 0,
-            "y": 33
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 40,
@@ -2238,7 +2142,7 @@
             "h": 10,
             "w": 8,
             "x": 9,
-            "y": 33
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 3,
@@ -2345,7 +2249,7 @@
             "h": 7,
             "w": 7,
             "x": 17,
-            "y": 33
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 32,
@@ -2447,7 +2351,7 @@
             "h": 10,
             "w": 9,
             "x": 0,
-            "y": 40
+            "y": 32
           },
           "id": 37,
           "links": [],
@@ -2557,7 +2461,7 @@
             "h": 8,
             "w": 8,
             "x": 9,
-            "y": 43
+            "y": 35
           },
           "hiddenSeries": false,
           "id": 47,
@@ -2873,6 +2777,6 @@
   "timezone": "",
   "title": "Debhol server metrics",
   "uid": "debholservermetrics",
-  "version": 1,
+  "version": 18,
   "weekStart": ""
 }

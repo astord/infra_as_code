@@ -10,6 +10,7 @@ services:
     restart: always
     volumes:
       - ./prometheus-2y.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus-2y-alerts.yml:/etc/prometheus/alerts.yml
       - time_db_2y:/prometheus
     ports:
       - 9090:9090
@@ -30,6 +31,7 @@ services:
     restart: always
     volumes:
       - ./prometheus-1m.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus-1m-alerts.yml:/etc/prometheus/alerts.yml
       - time_db_1m:/prometheus
     ports:
       - 9090:9090
@@ -44,9 +46,6 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
       - '--storage.tsdb.retention.time=31d'
-  #alertmanager:
-  #nodeexporter:
-  #cadvisor:
   grafana: #container name
     depends_on:
       - prom-2y

@@ -1,0 +1,29 @@
+name: "mon-alerts" #Compose project name.
+services:
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: monitoring-alertmanager
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    environment:
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    restart: unless-stopped
+    expose:
+      - 9093
+    dns: 10.1.0.11
+    dns_search: ast
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.27
+
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
