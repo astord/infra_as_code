@@ -1,0 +1,140 @@
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency Grapher
+remark = Welcome to the SmokePing website of WORKS Company. \
+         Here you will learn all about the latency of our network.
+
++ InternetSites
+
+menu = Internet Sites
+title = Internet Sites
+
+++ Facebook
+menu = Facebook
+title = Facebook
+host = facebook.com
+
+++ Youtube
+menu = YouTube
+title = YouTube
+host = youtube.com
+
+++ GoogleSearch
+menu = Google
+title = google.com
+host = google.com
+
+++ linuxserverio
+menu = linuxserver.io
+title = linuxserver.io
+host = linuxserver.io
+
++ Bulgaria
+
+menu = Bulgaria
+title = Bulgarian Connectivity
+
+++ BTK_Default_GW
+title = BTK Default GW
+host = 213.91.171.1
+++ mail_bg
+host = mail.bg
+++ dir_bg
+host = dir.bg
+
++ Europe
+
+menu = Europe
+title = European Connectivity
+
+++ Germany
+
+menu = Germany
+title = The Fatherland
+
++++ TelefonicaDE
+
+menu = Telefonica DE
+title = Telefonica DE
+host = www.telefonica.de
+
+++ UK
+
+menu = United Kingdom
+title = United Kingdom
+
++++ CambridgeUni
+
+menu = Cambridge
+title = Cambridge
+host = cam.ac.uk
+
++++ UEA
+
+menu = UEA
+title = UEA
+host = www.uea.ac.uk
+
++ USA
+
+menu = North America
+title = North American Connectivity
+
+++ MIT
+
+menu = MIT
+title = Massachusetts Institute of Technology Webserver
+host = web.mit.edu
+
+++ UCB
+
+menu = U. C. Berkeley
+title = U. C. Berkeley Webserver
+host = www.berkeley.edu
+
++ DNS
+menu = DNS
+title = DNS
+
+++ GoogleDNS1
+menu = Google DNS 1
+title = Google DNS 8.8.8.8
+host = 8.8.8.8
+
++ DNSProbes
+menu = DNS Probes
+title = DNS Probes
+probe = DNS
+
+++ BTK1
+menu = BTK1
+title = ns1.btc-net.bg 212.39.90.52
+host = 212.39.90.52
+
+++ BTK2
+menu = BTK2
+title = ns1.btc-net.bg 212.39.90.53
+host = 212.39.90.53
+
+++ GoogleDNS1
+menu = Google DNS 1
+title = Google DNS 8.8.8.8
+host = 8.8.8.8
+
+++ GoogleDNS2
+menu = Google DNS 2
+title = Google DNS 8.8.4.4
+host = 8.8.4.4
+
+++ CloudflareDNS1
+menu = Cloudflare DNS 1
+title = Cloudflare DNS 1.1.1.1
+host = 1.1.1.1
+
+++ CloudflareDNS2
+menu = Cloudflare DNS 2
+title = Cloudflare DNS 1.0.0.1
+host = 1.0.0.1

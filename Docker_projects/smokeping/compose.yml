@@ -1,0 +1,27 @@
+---
+name: "smokeping" #Compose project name.
+services:
+  smokeping: # container name
+    image: lscr.io/linuxserver/smokeping:latest
+    container_name: smokeping
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Sofia
+    volumes:
+      - /infra/git/infra_as_code/Docker_projects/smokeping/config:/config
+      - smokeping_data:/data
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.28
+    ports:
+      - 80:80
+    restart: unless-stopped
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
+volumes:
+  smokeping_data:
+    external: true
