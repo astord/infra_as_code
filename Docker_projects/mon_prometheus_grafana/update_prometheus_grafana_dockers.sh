@@ -5,7 +5,7 @@ if [ $# -lt 2 ]; then
     >&2
     echo "Updates the prometheus and grafana images with the latest image from hub.docker.com"
     echo -e "Usage:\nbash $0 <current_prometheus_image_tag> <current_grafana_image_tag>\n"
-    echo "Current images:\n"
+    echo -e "Current images:\n"
     docker images prom/prometheus && docker images grafana/grafana
     exit 1
 fi
