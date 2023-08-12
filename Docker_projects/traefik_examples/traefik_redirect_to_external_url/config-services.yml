@@ -1,0 +1,16 @@
+http:
+  routers:
+    rpi:
+      entryPoints:
+        - "https"
+        - "http"
+      rule: "Host (`somehost.ast`)" #obfuscated for forum post
+      #tls:
+      #  certResolver: http
+      service: rpi
+  services:
+    rpi:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.0.9:80"
+        passHostHeader: true

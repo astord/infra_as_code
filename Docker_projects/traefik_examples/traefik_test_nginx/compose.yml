@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  test-nginx-external:
+    # A container that exposes an API to show its IP address
+    image: nginx:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test-nginx-external.rule=HostHeader(`debhol3.ast`)"
+      - "traefik.docker.network=docker_ipvlan"
+    networks:
+      web:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.224
+networks:
+  # "web" network is needed for connecting traefik with the rest of the client dockers
+  web:
+    external: true
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true

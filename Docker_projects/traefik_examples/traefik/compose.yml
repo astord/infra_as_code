@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:latest
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--log.level=DEBUG"
+      - "--accesslog=true"
+   # ports:
+   #   # The HTTP port
+   #   - "10.1.0.12:8088:80"
+   #   # The Web UI (enabled by --api.insecure=true)
+   #   - "10.1.0.12:8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      web:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.223
+    labels:
+      - "traefik.docker.network=docker_ipvlan"
+  test-nginx:
+    # A container that exposes an API to show its IP address
+    image: nginx:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test-nginx.rule=HostHeader(`debhol2.ast`,`alabala.ast`)"
+      - "traefik.docker.network=docker_ipvlan"
+    networks:
+      web:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.222
+networks:
+  # "web" network is needed for connecting traefik with the rest of the client dockers
+  web:
+    name: web
+    driver: bridge
+    #external: true
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
