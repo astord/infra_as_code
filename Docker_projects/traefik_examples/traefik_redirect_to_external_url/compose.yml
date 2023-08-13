@@ -4,29 +4,30 @@ services:
   reverse-proxy-rpi:
     # The official v2 Traefik docker image
     image: traefik:latest
-    # Enables the web UI and tells Traefik to listen to docker
-    #command: >>> This is already in the yml files
-    #  - "--api.insecure=true"
-    #  - "--providers.docker"
-    #  - "--log.level=DEBUG"
-    #  - "--accesslog=true"
-    #  - "--entrypoints.http.address=:80"
-    #  - "--entrypoints.https.address=:443"
     volumes:
       # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock
+      #- /var/run/docker.sock:/var/run/docker.sock
       # Configs
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - ./config-services.yml:/etc/traefik/config-services.yml:ro
     networks:
+      web:
       docker_ipvlan:
         ipv4_address: 10.1.0.225
-    #labels: >> This is already in the yml files
-    #  - "traefik.docker.network=docker_ipvlan"
-    #  - "traefik.http.routers.rpi.entrypoints=http"
-    #  - "traefik.http.routers.rpi.rule=HostHeader(`somedomain.ast`)"
-    #  - "traefik.http.routers.rpi.service=rpi@file"
+
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy
+    container_name: socket-proxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: 1
+    networks:
+      - web
 networks:
+  web:
+    external: true
   docker_ipvlan:
     driver: ipvlan
     name: docker_ipvlan
