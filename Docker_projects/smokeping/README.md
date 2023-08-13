@@ -21,10 +21,19 @@ docker volume create smokeping_data
 
 # Updates/Patching
 
+## Check the current images
+
 ```
-docker-compose pull   # Update all images
-docker-compose up -d  # Compose update all containers
-docker image prune    # remove the old dangling images
+docker images lscr.io/linuxserver/smokeping
+```
+
+## Patching
+
+```
+docker tag lscr.io/linuxserver/smokeping:latest lscr.io/linuxserver/smokeping:vX.0  # Tag the current image
+docker compose pull                                                                 # Update all images
+docker compose up -d                                                                # Compose update all containers
+docker image prune                                                                  # remove the old dangling images
 ```
 
 ## Remove

@@ -5,6 +5,8 @@ if [ $# -eq 0 ]; then
     >&2 
     echo "Updates the pihole images with the latest image from hub.docker.com"
     echo -e "Usage:\nbash $0 <current_version>/<tag>\n"
+    echo "Current images:"
+    docker images smb
     exit 1
 fi
 

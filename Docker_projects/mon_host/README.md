@@ -11,7 +11,9 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 
 ### cadvisor update
 Check the latest release version for gcr.io/cadvisor/cadvisor:v0.47.0 image from https://github.com/google/cadvisor/releases
-If there is a new image, put the new version inside the compose.yml file
+If there is a new image:
+- put the new version inside the `compose.yml` file
+- `docker compose up -d --no-deps`
 
 ### node-exporter update
 ```

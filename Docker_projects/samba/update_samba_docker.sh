@@ -21,4 +21,4 @@ docker compose up -d
 echo -e "\nAll samba images now:"
 docker images smb
 echo -e "\n(Optional) Remove the left images"
-echo "docker rmi samba:<tag>"
+echo "docker rmi smb:<tag>"
