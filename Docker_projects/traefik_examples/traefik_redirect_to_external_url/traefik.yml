@@ -11,6 +11,11 @@ entryPoints:
     address: ":80"
   https:
     address: ":443"
+    #proxyProtocol:
+    #  insecure: true
+
+serversTransport:
+  insecureSkipVerify: true
 
 providers:
   docker:

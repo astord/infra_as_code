@@ -4,6 +4,7 @@ services:
   reverse-proxy:
     # The official v2 Traefik docker image
     image: traefik:latest
+    restart: no
     # Enables the web UI and tells Traefik to listen to docker
     command:
       - "--api.insecure=true"
@@ -27,6 +28,7 @@ services:
   test-nginx:
     # A container that exposes an API to show its IP address
     image: nginx:latest
+    restart: no
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.test-nginx.rule=HostHeader(`debhol2.ast`,`alabala.ast`)"

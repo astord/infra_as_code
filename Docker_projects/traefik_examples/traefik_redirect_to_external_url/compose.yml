@@ -4,12 +4,15 @@ services:
   reverse-proxy-rpi:
     # The official v2 Traefik docker image
     image: traefik:latest
+    container_name: traefik_test_redirect_to_url
+    restart: no
     volumes:
       # So that Traefik can listen to the Docker events
       #- /var/run/docker.sock:/var/run/docker.sock
       # Configs
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - ./config-services.yml:/etc/traefik/config-services.yml:ro
+      - ./certs:/etc/traefik/certs
     networks:
       web:
       docker_ipvlan:
@@ -17,8 +20,8 @@ services:
 
   socket-proxy:
     image: tecnativa/docker-socket-proxy
-    container_name: socket-proxy
-    restart: unless-stopped
+    container_name: traefik_socket-proxy
+    restart: no
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:

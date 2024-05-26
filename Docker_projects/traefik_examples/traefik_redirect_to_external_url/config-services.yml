@@ -1,16 +1,20 @@
 http:
   routers:
     rpi:
-      entryPoints:
+      entryPoints: # If not specified, HTTP routers will accept requests from all defined entry points
         - "https"
         - "http"
-      rule: "Host (`somehost.ast`)" #obfuscated for forum post
-      #tls:
-      #  certResolver: http
+      rule: "Host (`prodanov.org`)"
+      tls: true
       service: rpi
   services:
     rpi:
       loadBalancer:
         servers:
-          - url: "http://10.1.0.9:80"
+          - url: "https://10.1.0.9:443"
         passHostHeader: true
+
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/fullchain.pem
+      keyFile: /etc/traefik/certs/privkey.pem
