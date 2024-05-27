@@ -29,6 +29,8 @@ services:
     # A container that exposes an API to show its IP address
     image: nginx:latest
     restart: no
+    depends_on: 
+      - reverse-proxy #boot after the traefic proxy, as to work properly
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.test-nginx.rule=HostHeader(`debhol2.ast`,`alabala.ast`)"
