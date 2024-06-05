@@ -1,3 +1,4 @@
 smokeping/config/
 !smokeping/config/Targets
 **/*privkey.pem
+prodanov_org_temp/ssh_key/id_rsa
