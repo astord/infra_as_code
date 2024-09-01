@@ -1,6 +1,19 @@
-version: "3"
-
 services:
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: proxy-dns
+
+    # See the list of environment variables at https://github.com/cloudflare/cloudflared/blob/master/cmd/cloudflared/proxydns/cmd.go
+    environment:
+      TUNNEL_DNS_UPSTREAM: "https://1.0.0.1/dns-query,https://1.1.1.1/dns-query"
+      TUNNEL_DNS_PORT: 5053
+      # Listen on all interfaces
+      TUNNEL_DNS_ADDRESS: "0.0.0.0"
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.12
   pihole:
     container_name: pihole
     image: pihole:latest
@@ -13,6 +26,8 @@ services:
       REV_SERVER_DOMAIN: 'ast'      # forward DNS for '.ast' domain
       REV_SERVER_TARGET: '10.1.0.1' # forward DNS to the router IP
       REV_SERVER_CIDR: '10.1.0.0/24'
+      DNSMASQ_LISTENING: 'all' # to suppress ignoring query from non-local network 10.6.0.5
+      #PIHOLE_DNS_: '127.0.0.1#5053' #cloudflared DoH
     # Volumes store your data between container upgrades
     volumes:
       - './etc-pihole/custom.list:/etc/pihole/custom.list'

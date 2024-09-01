@@ -30,7 +30,6 @@ scrape_configs:
 
   - job_name: 'debhol-host'
 
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 1m
     metrics_path: '/metrics'
 
@@ -38,3 +37,9 @@ scrape_configs:
       - targets: ['debhol-metrics.ast:9100', 'debhol-cadvisor.ast:8080']
         labels:
           group: 'debhol-host'
+
+  - job_name: 'merlin-asus'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['merlin.ast:9100']
