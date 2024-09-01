@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y openssh-server
+# Configure SSH
+RUN mkdir /var/run/sshd
+#RUN echo 'root:parola' | chpasswd
+COPY ./ssh_key/id_rsa.pub /root/.ssh/authorized_keys
+#password for user login
+#RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# Start SSH server
+CMD ["/usr/sbin/sshd", "-D"]

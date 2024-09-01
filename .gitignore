@@ -6,3 +6,4 @@ Docker_projects/smokeping/config/
 **/*privkey.pem
 Docker_projects/prodanov_org_temp/ssh_key/id_rsa
 Docker_projects/prodanov_org_temp/content
+Docker_projects/prodanov_org_temp/certs

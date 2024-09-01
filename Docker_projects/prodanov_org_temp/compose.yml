@@ -1,0 +1,32 @@
+version: '3'
+
+name: prodanov-org
+services:
+  web:
+    # prodanov.org web
+    image: nginx:latest
+    restart: always
+    volumes:
+      #- ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx_conf.d:/etc/nginx/conf.d
+      - ./content:/usr/share/nginx/html:ro
+      - ./certs:/etc/nginx/ssl
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.13
+  scp:
+    image: ubuntu_ssh_scp:latest
+    restart: always
+    build: .
+    hostname: prodanov_org
+    volumes:
+      - ./content:/root/prodanov_org
+      - /data/geo_storage:/root/prodanov_org/disk
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.14
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
