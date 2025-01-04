@@ -1,6 +1,25 @@
 # Connect url
 http://plex.ast:32400/web
 
+# Before first start
+
+## ipvlan netowork
+
+You MUST create the network (if doesn't exsists) before to bring up the container!
+
+```
+#Create the network (if doesn't exists):
+docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o parent=enp1s0 docker_ipvlan
+```
+
+## Library volume
+Create the volume for storing configs (Library) if doesn't exist:
+
+```
+docker volume create plex_library
+```
+
+
 # Updates/Patching
 
 ## Check the current images

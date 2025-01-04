@@ -10,6 +10,7 @@ services:
       - VERSION=docker
     volumes:
       - /data/ol_storage/HDD400/Downloads:/movies
+      - plex_library:/config
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
@@ -20,4 +21,7 @@ networks:
   docker_ipvlan:
     driver: ipvlan
     name: docker_ipvlan
+    external: true
+volumes:
+  plex_library:
     external: true
