@@ -14,6 +14,10 @@ RUN apk --no-cache upgrade && apk --no-cache add samba samba-common-tools
 # create a dir for the config and the share
 RUN mkdir /config /shared1 /shared2
 
+# Create a Samba user "guest"
+RUN echo -e "${SMB_PASS}\n${SMB_PASS}" | smbpasswd -a -s guest && \
+    smbpasswd -e guest
+
 # copy config files from project folder to get a default config going for samba and supervisord
 COPY *.conf /config/
 
