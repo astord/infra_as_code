@@ -1,0 +1,16 @@
+services:
+  nginx:
+    container_name: nginx-test-2
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-httptls-demo2.tls=true
+      - traefik.http.routers.nginx-httptls-demo2.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.nginx-httptls-demo2.entrypoints=websecure
+      - traefik.http.routers.nginx-httptls-demo2.rule=Host(`stabuilding.com`)
+networks:
+  frontend:
+    external: true

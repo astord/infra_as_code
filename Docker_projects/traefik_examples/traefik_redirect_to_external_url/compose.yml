@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   reverse-proxy-rpi:
     # The official v2 Traefik docker image
@@ -30,6 +28,7 @@ services:
       - web
 networks:
   web:
+    #driver: bridge
     external: true
   docker_ipvlan:
     driver: ipvlan

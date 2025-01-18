@@ -1,0 +1,22 @@
+services:
+  nginx:
+    container_name: nginx-stabuilding-com-test2
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      frontend:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.134
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-httptls-demo2.tls=true
+      - traefik.http.routers.nginx-httptls-demo2.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.nginx-httptls-demo2.entrypoints=websecure
+      - traefik.http.routers.nginx-httptls-demo2.rule=Host(`stabuilding.com`)
+networks:
+  frontend:
+    external: true
+  docker_ipvlan:
+    external: true

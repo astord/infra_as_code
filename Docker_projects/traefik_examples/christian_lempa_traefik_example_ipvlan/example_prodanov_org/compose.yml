@@ -1,0 +1,23 @@
+services:
+  nginx:
+    container_name: nginx-prodanov-org-test2
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      frontend:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.133
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-httptls-demo.tls=true
+      - traefik.http.routers.nginx-httptls-demo.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.nginx-httptls-demo.entrypoints=websecure
+      #- traefik.http.routers.nginx-httptls-demo.rule=Host(`prodanov.org`)
+      - traefik.http.routers.nginx-httptls-demo.rule=(Host(`prodanov.org`) || Host(`www.prodanov.org`))
+networks:
+  frontend:
+    external: true
+  docker_ipvlan:
+    external: true

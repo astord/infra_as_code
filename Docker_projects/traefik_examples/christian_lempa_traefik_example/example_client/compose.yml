@@ -1,0 +1,16 @@
+services:
+  nginx:
+    container_name: nginx-test-1
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-httptls-demo.tls=true
+      - traefik.http.routers.nginx-httptls-demo.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.nginx-httptls-demo.entrypoints=websecure
+      - traefik.http.routers.nginx-httptls-demo.rule=Host(`prodanov.org`)
+networks:
+  frontend:
+    external: true

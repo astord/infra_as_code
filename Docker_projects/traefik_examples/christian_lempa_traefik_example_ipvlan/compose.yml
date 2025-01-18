@@ -1,0 +1,21 @@
+---
+services:
+  traefik-chris:
+    image: traefik:v3.3
+    container_name: traefik-demo-2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./cf_certs:/var/traefik/certs:rw #the place where the traefik will store the issued certs
+    restart: unless-stopped
+    environment:
+      CF_DNS_API_TOKEN: "$CF_DNS_API_TOKEN"
+    networks:
+      frontend:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.122
+networks:
+  frontend:
+    external: true
+  docker_ipvlan:
+    external: true
