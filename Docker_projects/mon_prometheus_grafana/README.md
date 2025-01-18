@@ -1,3 +1,8 @@
+# Prometheus and Grafana URLs
+- http://prom-1m.ast:9090/
+- http://prom-2y.ast:9090/
+- http://grafana.ast:3000/
+
 ## ipvlan netowork
 
 You first MUST create the network used by all docker containers bellow (if doesn't exsists).
@@ -19,6 +24,12 @@ docker volume create time_db_1m
 ```
 
 ## Grafana
+### Before fist start
+
+```
+.env 
+ADMIN_PASSWORD=<YOUR_PASS>
+```
 
 ## Updates/Upgrades
 
