@@ -1,0 +1,24 @@
+services:
+  test-nginx:
+    # A container that exposes an API to show its IP address
+    image: nginx:latest
+    restart: no
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.test-nginx.rule=Host(`debhol2.ast`)
+      - traefik.http.routers.test-nginx.entrypoints=websecure
+      - traefik.http.routers.test-nginx.tls=true
+      - traefik.http.routers.test-nginx.service=client           # fix traefik error="service \"test-nginx-test-client\" error: port is missing"
+      - traefik.http.services.client.loadbalancer.server.port=80 # fix traefik error="service \"test-nginx-test-client\" error: port is missing"
+    networks:
+      web-network:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.222
+networks:
+  web-network:
+    driver: bridge
+    external: true
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true

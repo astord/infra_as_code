@@ -1,0 +1,33 @@
+services:
+  traefik-proxy:
+    image: traefik:v3.3
+    container_name: traefik-proxy
+    restart: unless-stopped
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./cf_certs:/var/traefik/certs:rw #the place where the traefik will store the issued certs
+    environment:
+      CF_DNS_API_TOKEN: "$CF_DNS_API_TOKEN"
+    networks:
+      web:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.9
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy
+    container_name: socket-proxy
+    restart: no
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: 1
+    networks:
+      - web
+networks:
+  web:
+    driver: bridge
+    name: web-network
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true

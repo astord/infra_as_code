@@ -1,0 +1,40 @@
+name: prodanov-org
+services:
+  web:
+    # prodanov.org web
+    image: nginx:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prodanov_org.tls=true
+      - traefik.http.routers.prodanov_org.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.prodanov_org.entrypoints=websecure
+      - traefik.http.routers.prodanov_org.rule=(Host(`prodanov.org`) || Host(`www.prodanov.org`))
+      - traefik.http.routers.prodanov_org.service=prodanov-service
+      - traefik.http.services.prodanov-service.loadbalancer.server.port=80
+
+    restart: always
+    volumes:
+      - ./content:/usr/share/nginx/html:ro
+    networks:
+      web-network:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.13
+  scp:
+    image: ubuntu_ssh_scp:latest
+    restart: always
+    build: .
+    hostname: prodanov_org
+    volumes:
+      - ./content:/root/prodanov_org
+      - /data/geo_storage:/root/prodanov_org/disk
+    networks:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.14
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
+  web-network:
+    driver: bridge
+    external: true
