@@ -23,7 +23,7 @@ providers:
     endpoint: "tcp://socket-proxy:2375"
     watch: true
     exposedByDefault: false
-    network: docker_ipvlan
+    network: docker_ipvlan #default docker network to use for connections to all containers
   file:
     filename: /etc/traefik/config-services.yml
 

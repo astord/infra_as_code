@@ -1,22 +1,38 @@
-version: '3'
-
-name: prodanov-org
+name: prodanov-org-temp
 services:
   web:
     # prodanov.org web
-    image: nginx:latest
-    restart: always
+    image: nginx:v1
+    #labels:
+    #- "traefik.enable=true"
+    #- "traefik.http.routers.web.rule=Host(`prodanov.org`)"
+    #- "traefik.docker.network=docker_ipvlan"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prodanov_org.tls=true
+      #- traefik.http.routers.prodanov_org.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.prodanov_org.entrypoints=websecure
+      #- traefik.http.routers.prodanov_org.rule=(Host(`prodanov.org`) || Host(`www.prodanov.org`))
+      - traefik.http.routers.prodanov_org.rule=Host(`prodanov.org`)
+      - traefik.http.routers.prodanov_org.service=prodanov-service
+      - traefik.http.services.prodanov-service.loadbalancer.server.port=443
+      - traefik.http.services.prodanov-service.loadbalancer.server.scheme=https
+      #- traefik.http.services.prodanov-service.loadbalancer.serversTransport=prodanov-transport
+
+
+    restart: no
     volumes:
       #- ./nginx.conf:/etc/nginx/nginx.conf
       - ./nginx_conf.d:/etc/nginx/conf.d
       - ./content:/usr/share/nginx/html:ro
       - ./certs:/etc/nginx/ssl
     networks:
+      web-network:
       docker_ipvlan:
         ipv4_address: 10.1.0.13
   scp:
-    image: ubuntu_ssh_scp:latest
-    restart: always
+    image: ubuntu_ssh_scp:v1
+    restart: no
     build: .
     hostname: prodanov_org
     volumes:
@@ -29,4 +45,7 @@ networks:
   docker_ipvlan:
     driver: ipvlan
     name: docker_ipvlan
+    external: true
+  web-network:
+    driver: bridge
     external: true
