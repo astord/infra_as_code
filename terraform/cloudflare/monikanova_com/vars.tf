@@ -7,5 +7,6 @@ variable "account_id" {
 }
 
 variable "public_ip" {
-  type = string
+  type    = string
+  default = "91.146.98.48"
 }
