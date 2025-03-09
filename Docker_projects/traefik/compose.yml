@@ -3,6 +3,8 @@ services:
     image: traefik:v3.3
     container_name: traefik-proxy
     restart: unless-stopped
+    depends_on:
+      - socket-proxy #boot after the socket-proxy
     volumes:
       #- /var/run/docker.sock:/var/run/docker.sock
       - ./config/traefik.yml:/etc/traefik/traefik.yml:ro
