@@ -1,5 +1,7 @@
 # https://hub.docker.com/r/linuxserver/smokeping
 
+http://smokeping.ast
+
 # Before first start
 
 ## ipvlan netowork

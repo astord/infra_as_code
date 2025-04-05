@@ -1,7 +1,5 @@
 Docs: https://github.com/pi-hole/docker-pi-hole
 
-http://pihole.ast/admin/
-
 ---
 
 # ipvlan netowork
