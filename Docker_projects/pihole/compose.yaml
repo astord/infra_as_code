@@ -17,6 +17,8 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    depends_on:
+      - cloudflared #boot after cloudflared
     environment:
       TZ: 'Europe/Sofia'
       FTLCONF_webserver_api_password: ${WEBPASSWORD}
@@ -27,10 +29,7 @@ services:
       #FTLCONF_WHITELIST: "s.youtube.com"
       FTLCONF_dns_rateLimit_count: 0
       FTLCONF_dns_rateLimit_interval: 0  
-      FTLCONF_DNS_HOSTS: 10.1.0.3 xerox.ast;10.1.0.7 debhol-cadvisor.ast;10.1.0.8 debhol-metrics.ast;10.1.0.10 debhol.ast;10.1.0.11 pihole.ast;10.1.0.20 ol-storage.ast;10.1.0.24 grafana.ast;10.1.0.25 prom-2y.ast;10.1.0.26 prom-1m.ast;10.1.0.27 alertmanager.ast;10.1.0.28 smokeping.ast;10.1.0.29 plex.ast;10.1.0.50 x1.ast;10.1.0.51 t590.ast;10.1.0.52 galaxy-a51.ast;10.1.0.53 huawei-p40.ast;10.1.0.55 laptop-ol.ast;10.1.0.56 ana-lenovo.ast;10.1.0.57 galaxy-s24.ast;10.1.0.58 galaxy-a40.ast
-    # Volumes store your data between container upgrades
-    volumes:
-      - './etc-pihole/custom.list:/etc/pihole/custom.list'
+      FTLCONF_DNS_HOSTS: 10.1.0.3 xerox.ast;10.1.0.7 debhol-cadvisor.ast;10.1.0.8 debhol-metrics.ast;10.1.0.10 debhol.ast;10.1.0.11 pihole.ast;10.1.0.20 ol-storage.ast;10.1.0.24 grafana.ast;10.1.0.25 prom-2y.ast;10.1.0.26 prom-1m.ast;10.1.0.27 alertmanager.ast;10.1.0.28 smokeping.ast;10.1.0.29 plex.ast;10.1.0.50 x1.ast;10.1.0.51 t590.ast;10.1.0.52 galaxy-a51.ast;10.1.0.53 huawei-p40.ast;10.1.0.55 laptop-ol.ast;10.1.0.56 ana-lenovo.ast;10.1.0.57 galaxy-s24.ast;10.1.0.58 galaxy-a40.ast;10.1.0.1 merlin.ast
     restart: unless-stopped
     networks:
       docker_ipvlan:

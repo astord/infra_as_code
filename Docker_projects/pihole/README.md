@@ -21,6 +21,9 @@ Backup/restore is done from web interface: http://pihole.ast/admin/settings.php?
 
 `vX.Y` bellow is the incremented version of the `latest` image.
 
+**If during update problems with DNS resolution appear
+change the merlin router DNS settings to some public DNS instead of pihole 10.1.0.11 DNS**
+
 ```
 #Tag the old images:
 docker tag pihole/pihole:latest pihole/pihole:vX.0
