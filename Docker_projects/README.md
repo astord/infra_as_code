@@ -6,6 +6,9 @@
 10.1.0.12 cloudflared
 10.1.0.13 prodanov-org-web
 10.1.0.14 prodanov-org-scp
+10.1.0.15 monikanova-db
+10.1.0.16 monikanova-web
+10.1.0.17 stabuilding-web
 10.1.0.20 samba
 10.1.0.23 nfs
 10.1.0.24 grafana
