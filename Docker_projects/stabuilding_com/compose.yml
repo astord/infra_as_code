@@ -1,0 +1,29 @@
+name: stabuilding-com
+services:
+  web:
+    # stabuilding.com web
+    image: nginx:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.stabuilding_com.tls=true
+      - traefik.http.routers.stabuilding_com.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.stabuilding_com.entrypoints=websecure
+      - traefik.http.routers.stabuilding_com.rule=(Host(`stabuilding.com`) || Host(`stabuilding.com`))
+      - traefik.http.routers.stabuilding_com.service=stabuilding-service
+      - traefik.http.services.stabuilding-service.loadbalancer.server.port=80
+
+    restart: always
+    volumes:
+      - ./content:/usr/share/nginx/html:ro
+    networks:
+      web-network:
+      docker_ipvlan:
+        ipv4_address: 10.1.0.17
+networks:
+  docker_ipvlan:
+    driver: ipvlan
+    name: docker_ipvlan
+    external: true
+  web-network:
+    driver: bridge
+    external: true
