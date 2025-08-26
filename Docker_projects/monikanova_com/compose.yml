@@ -26,11 +26,11 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      - traefik.http.routers.test-wp.rule=Host(`monikanova.com`)
-      - traefik.http.routers.test-wp.tls.certresolver=cloudflare-dp
-      - traefik.http.routers.test-wp.entrypoints=websecure
-      - traefik.http.routers.test-wp.tls=true
-      - traefik.http.routers.test-wp.service=wp-service
+      - traefik.http.routers.monikanova.rule=Host(`monikanova.com`)
+      - traefik.http.routers.monikanova.tls.certresolver=cloudflare-dp
+      - traefik.http.routers.monikanova.entrypoints=websecure
+      - traefik.http.routers.monikanova.tls=true
+      - traefik.http.routers.monikanova.service=wp-service
       - traefik.http.services.wp-service.loadbalancer.server.port=80
     environment:
       - WORDPRESS_DB_HOST=10.1.0.15
