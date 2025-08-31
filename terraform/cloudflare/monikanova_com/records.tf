@@ -11,6 +11,16 @@ resource "cloudflare_dns_record" "a_ipv4" {
   for_each = toset(["webmail", "ipv4", "mail"])
 
   zone_id = cloudflare_zone.monikanova_com.id
+  content = var.public_ip_bg
+  name    = each.key
+  proxied = false
+  type    = "A"
+  ttl     = "600"
+}
+resource "cloudflare_dns_record" "a_old" {
+  for_each = toset(["old"])
+
+  zone_id = cloudflare_zone.monikanova_com.id
   content = var.public_ip_es
   name    = each.key
   proxied = false
