@@ -8,10 +8,20 @@ resource "cloudflare_dns_record" "monikanova" {
   ttl     = 600
 }
 resource "cloudflare_dns_record" "a_ipv4" {
-  for_each = toset(["webmail", "ipv4", "mail"])
+  for_each = toset(["ipv4"])
 
   zone_id = cloudflare_zone.monikanova_com.id
   content = var.public_ip_bg
+  name    = each.key
+  proxied = false
+  type    = "A"
+  ttl     = "600"
+}
+resource "cloudflare_dns_record" "mail" {
+  for_each = toset(["webmail", "mail"])
+
+  zone_id = cloudflare_zone.monikanova_com.id
+  content = var.public_ip_es
   name    = each.key
   proxied = false
   type    = "A"
