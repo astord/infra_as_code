@@ -1,4 +1,5 @@
 # Docker ipvlan IPs:
+10.1.0.1  | merlin           | https://merlin.ast:8443/
 10.1.0.7  | cadvisor
 10.1.0.8  | node-exporter
 10.1.0.9  | traefik-proxy

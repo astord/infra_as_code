@@ -21,6 +21,11 @@ Backup/restore is done from web interface: https://pihole.ast/admin/settings/tel
 
 `vX.Y` bellow is the incremented version of the `latest` image.
 
+```
+#List all images related to pihole
+docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/cloudflared'
+```
+
 **If during update problems with DNS resolution appear
 change the merlin router DNS settings to some public DNS instead of pihole 10.1.0.11 DNS**
 
@@ -30,8 +35,6 @@ docker tag pihole/pihole:latest pihole/pihole:vX.0
 docker tag cloudflare/cloudflared:latest cloudflare/cloudflared:vX.0
 #Pull the latest cloudflared image:
 docker compose pull
-#Build new `latest` image. The same as `docker build --no-cache -t pihole/pihole:latest .`
-docker compose build --no-cache
 #Replace the running container
 docker compose down
 docker compose up -d
