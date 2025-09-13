@@ -1,19 +1,19 @@
 # Docker ipvlan IPs:
-10.1.0.7 cadvisor
-10.1.0.8 node-exporter
-10.1.0.9 traefik-proxy
-10.1.0.11 pihole
-10.1.0.12 cloudflared
-10.1.0.13 prodanov-org-web
-10.1.0.14 prodanov-org-scp
-10.1.0.15 monikanova-db
-10.1.0.16 monikanova-web
-10.1.0.17 stabuilding-web
-10.1.0.20 samba
-10.1.0.23 nfs
-10.1.0.24 grafana
-10.1.0.25 prom-2y
-10.1.0.26 prom-1m
-10.1.0.27 alertnamager
-10.1.0.28 smokeping
-10.1.0.29 plex
+10.1.0.7  | cadvisor
+10.1.0.8  | node-exporter
+10.1.0.9  | traefik-proxy
+10.1.0.11 | pihole           | https://pihole.ast/admin
+10.1.0.12 | cloudflared
+10.1.0.13 | prodanov-org-web
+10.1.0.14 | prodanov-org-scp
+10.1.0.15 | monikanova-db
+10.1.0.16 | monikanova-web
+10.1.0.17 | stabuilding-web
+10.1.0.20 | samba
+10.1.0.23 | nfs
+10.1.0.24 | grafana
+10.1.0.25 | prom-2y
+10.1.0.26 | prom-1m
+10.1.0.27 | alertnamager
+10.1.0.28 | smokeping
+10.1.0.29 | plex            | http://plex.ast:32400/web
