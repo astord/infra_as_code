@@ -34,34 +34,44 @@ docker rmi mariadb:....
 
 ```
 ###Create the backup tar
-docker exec $(docker ps -q --filter "name=monikanova-wp-1") tar czf /tmp/wp_backup.tar.gz -C /var/www/html .
+docker exec $(docker ps -q --filter "name=monikanova-wp-1") tar czf /tmp/wp_backup-$(date -I).tar.gz -C /var/www/html .
 
 ###Copy the backup tar from the container to the host /tmp/wp_test_backup
-docker cp $(docker ps -q --filter "name=monikanova-wp-1"):/tmp/wp_backup.tar.gz /tmp/wp_test_backup/
+mkdir -p /tmp/wp-backups/
+docker cp $(docker ps -q --filter "name=monikanova-wp-1"):/tmp/wp_backup-$(date -I).tar.gz /tmp/wp-backups/
 
 ###Remove the backup tar from the container
-docker exec $(docker ps -q --filter "name=monikanova-wp-1") rm -rf /tmp/wp_backup.tar.gz
+docker exec $(docker ps -q --filter "name=monikanova-wp-1") rm -rf /tmp/wp_backup-$(date -I).tar.gz
 ```
 
 ## 2. Database backup stored to the host
 
 ```
+mkdir -p /tmp/wp-backup
 source .env
-docker exec $(docker ps -q --filter "name=monikanova-db-1") mysqldump -u wordpress -p$SB_PASS wordpress > /tmp/wp-db-backup-2025-02-22.sql
+docker exec $(docker ps -q --filter "name=monikanova-db-1") mysqldump -u wordpress -p$DB_PASS wordpress > /tmp/wp-backups/wp-db-backup-$(date -I).sql
 ```
 
 ## 3. Wordpress restore
 
 ```
-#Copy the backup from the host /tmp/wp_test_backup/wp_backup.tar.gz to the container:
-docker cp /tmp/wp_test_backup/wp_backup.tar.gz $(docker ps -q --filter "name=monikanova-wp-1"):/tmp/
+#Copy the backup from the host $WP_BACKUP_DIR/$WP_BACKUP_TAR (`/tmp/wp-backups/some_name.tar.gz`) to the container:
+WP_BACKUP_DIR=/tmp/wp-backups
+WP_BACKUP_TAR=some-name.tar.gz
+docker cp $WP_BACKUP_DIR/$WP_BACKUP_TAR $(docker ps -q --filter "name=monikanova-wp-1"):/tmp/
 
 #Extract the tar inside the container:
-docker exec $(docker ps -q --filter "name=monikanova-wp-1") tar xzf /tmp/wp_backup.tar.gz -C /var/www/html
+docker exec $(docker ps -q --filter "name=monikanova-wp-1") tar xzf /tmp/$WP_BACKUP_TAR -C /var/www/html
+
+#Delete the backup tar from the container
+docker exec $(docker ps -q --filter "name=monikanova-wp-1") rm -rf /tmp/$WP_BACKUP_TAR
 ```
 
 ## 4. Database restore from the host stored backup
 
 ```
-docker exec -i $(docker ps -q --filter "name=monikanova-db-1") mysql -u wordpress -p$DB_PASS wordpress < /tmp/wp-db-backup-2025-02-22.sql
+WP_BACKUP_DIR=/tmp/wp-backups
+WP_DB_BACKUP=some_name.sql
+source .env
+docker exec -i $(docker ps -q --filter "name=monikanova-db-1") mysql -u wordpress -p$DB_PASS wordpress < $WP_BACKUP_DIR/$WP_DB_BACKUP
 ```
