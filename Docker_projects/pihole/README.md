@@ -17,7 +17,7 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 
 **If you have custom black/whitelists you need to backup/restore them :exclamation:**
 
-Backup/restore is done from web interface: http://pihole.ast/admin/settings.php?tab=teleporter
+Backup/restore is done from web interface: https://pihole.ast/admin/settings/teleporter
 
 `vX.Y` bellow is the incremented version of the `latest` image.
 
