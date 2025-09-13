@@ -35,11 +35,11 @@ ADMIN_PASSWORD=<YOUR_PASS>
 
 ```
 cd <project_dir>
-docker images prom/prometheus && docker images grafana/grafana # check the current images
-docker tag prom/prometheus:latest prom/prometheus:vX.0         # tag the old image in case of revert is needed
-docker tag grafana/grafana:latest grafana/grafana:vX.0         # tag the old image in case of revert is needed
-docker compose pull                                            # pulls the latest images
-docker compose up -d --no-deps                                 # restarts containers with newer images
+docker images --filter=reference=prom/prometheus --filter=reference=grafana/grafana # check the current images
+docker tag prom/prometheus:latest prom/prometheus:vX.0                              # tag the old image in case of revert is needed
+docker tag grafana/grafana:latest grafana/grafana:vX.0                              # tag the old image in case of revert is needed
+docker compose pull                                                                 # pulls the latest images
+docker compose up -d --no-deps                                                      # restarts containers with newer images
 ```
 
 ## Remove

@@ -1,3 +1,7 @@
+# Cadvisor & Node exporter
+- cadvisor Web pages accessible on: http://10.1.0.7:8080/containers/
+- node exporter Web pages accessible on: http://10.1.0.8:9100
+
 ## ipvlan netowork
 
 You first MUST create the network used by all docker containers bellow (if doesn't exsists).
@@ -9,8 +13,14 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 
 ## Updates/Upgrades
 
+### List the current images
+
+```
+docker images --filter=reference='prom/node-exporter' --filter=reference='gcr.io/cadvisor/cadvisor'
+```
+
 ### cadvisor update
-Check the latest release version for gcr.io/cadvisor/cadvisor:v0.47.0 image from https://github.com/google/cadvisor/releases
+Check the latest release version for gcr.io/cadvisor/cadvisor:v0.52.1 image from https://github.com/google/cadvisor/releases
 If there is a new image:
 - put the new version inside the `compose.yml` file
 - `docker compose up -d --no-deps`

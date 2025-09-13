@@ -1,7 +1,7 @@
 # Docker ipvlan IPs:
 10.1.0.1  | merlin           | https://merlin.ast:8443/
-10.1.0.7  | cadvisor
-10.1.0.8  | node-exporter
+10.1.0.7  | cadvisor         | http://10.1.0.7:8080/containers/
+10.1.0.8  | node-exporter    | http://10.1.0.8:9100/
 10.1.0.9  | traefik-proxy
 10.1.0.11 | pihole           | https://pihole.ast/admin
 10.1.0.12 | cloudflared
