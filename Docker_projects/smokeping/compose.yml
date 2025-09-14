@@ -1,7 +1,7 @@
 ---
 name: "smokeping" #Compose project name.
 services:
-  smokeping: # container name
+  smokeping:
     image: lscr.io/linuxserver/smokeping:latest
     container_name: smokeping
     environment:
@@ -11,6 +11,8 @@ services:
     volumes:
       - /infra/git/infra_as_code/Docker_projects/smokeping/config:/config
       - smokeping_data:/data
+    dns:
+      - 10.1.0.11
     networks:
       docker_ipvlan:
         ipv4_address: 10.1.0.28

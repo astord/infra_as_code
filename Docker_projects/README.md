@@ -1,9 +1,12 @@
 # Docker ipvlan IPs:
-10.1.0.1  | merlin           | https://merlin.ast:8443/
-10.1.0.7  | cadvisor         | http://10.1.0.7:8080/containers/
-10.1.0.8  | node-exporter    | http://10.1.0.8:9100/
+
+IP | hostname | URL
+---|---|---
+10.1.0.1  | merlin (not ipvlan) | https://merlin.ast:8443/
+10.1.0.7  | cadvisor            | http://10.1.0.7:8080/containers/
+10.1.0.8  | node-exporter       | http://10.1.0.8:9100/
 10.1.0.9  | traefik-proxy
-10.1.0.11 | pihole           | https://pihole.ast/admin
+10.1.0.11 | pihole              | https://pihole.ast/admin
 10.1.0.12 | cloudflared
 10.1.0.13 | prodanov-org-web
 10.1.0.14 | prodanov-org-scp
@@ -16,5 +19,5 @@
 10.1.0.25 | prom-2y
 10.1.0.26 | prom-1m
 10.1.0.27 | alertnamager
-10.1.0.28 | smokeping
+10.1.0.28 | smokeping       | http://smokeping.ast/smokeping/
 10.1.0.29 | plex            | http://plex.ast:32400/web

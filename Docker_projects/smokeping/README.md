@@ -1,6 +1,7 @@
 # https://hub.docker.com/r/linuxserver/smokeping
 
 http://smokeping.ast
+http://smokeping.ast/smokeping/
 
 # Before first start
 

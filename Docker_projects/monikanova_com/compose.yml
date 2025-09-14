@@ -40,6 +40,9 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_CACHE', true);
         define('WP_MEMORY_LIMIT', '256M');
+    dns: # not 10.1.0.11 because not to depend ot this internal DNS
+      - 8.8.8.8
+      - 1.1.1.1
     networks:
       docker_ipvlan:
         ipv4_address: 10.1.0.16
