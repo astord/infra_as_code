@@ -1,6 +1,7 @@
 **/.terraform
 **/terraform.tfstate.backup
 **/.env
+**/*.zip
 Docker_projects/smokeping/config/
 !Docker_projects/smokeping/config/Targets
 **/*privkey.pem
