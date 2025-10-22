@@ -20,8 +20,7 @@ docker tag wordpress:latest wordpress:vX.0
 #Pull the latest cloudflared image:
 docker compose pull
 #Replace the running container
-docker compose down
-docker compose up -d
+docker compose down && sleep 1 && docker compose up -d && docker compose ps
 #Remove the left public pihole image:
 docker rmi wordpress:vX.0
 docker rmi mariadb:....

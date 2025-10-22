@@ -35,7 +35,7 @@ docker images lscr.io/linuxserver/smokeping
 ```
 docker tag lscr.io/linuxserver/smokeping:latest lscr.io/linuxserver/smokeping:vX.0  # Tag the current image
 docker compose pull                                                                 # Update all images
-docker compose up -d                                                                # Compose update all containers
+docker compose up -d && sleep 3 && docker compose ps                                # Compose update all containers and check status
 docker image prune                                                                  # remove the old dangling images
 ```
 

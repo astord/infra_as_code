@@ -36,8 +36,7 @@ docker tag lscr.io/linuxserver/plex:latest lscr.io/linuxserver/plex:vX.0
 #pull the `latest` image.
 docker compose pull
 #Replace the running container
-docker compose down
-docker compose up -d
+docker compose down && sleep 3 && docker compose up -d && sleep 3 && docker compose ps
 #Remove the dangling images:
 docker image prune
 ```

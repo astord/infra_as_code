@@ -12,7 +12,6 @@ fi
 
 cd $PROJECT_PATH
 echo -e "\nTag the old images"
-docker tag pihole:latest pihole:$1
 docker tag prom/prometheus:latest prom/prometheus:$1
 docker tag grafana/grafana:latest grafana/grafana:$2
 echo -e "\nPull the 'latest' images"
@@ -24,3 +23,4 @@ echo -e "\nAll images now:"
 docker images prom/prometheus && docker images grafana/grafana
 echo -e "\n(Optional) Remove the left public pihole image"
 echo "docker rmi prom/prometheus:<tag>\ndocker rmi grafana/grafana:<tag>"
+echo "IMPORTANT: After grafana docker is up, it's possible to take 5 mins. prior become accessible!"
