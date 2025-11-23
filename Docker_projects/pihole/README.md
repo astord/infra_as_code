@@ -27,7 +27,7 @@ docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/
 ```
 
 **If during update problems with DNS resolution appear
-change the merlin router DNS settings to some public DNS instead of pihole 10.1.0.11 DNS**
+change (temporarly) the merlin router DNS settings LAN -> DNS Director -> Enable DNS Director: switch to Off (It is On)**
 
 ```
 #Tag the old images:
