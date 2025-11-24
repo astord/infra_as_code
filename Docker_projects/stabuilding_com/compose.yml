@@ -8,7 +8,7 @@ services:
       - traefik.http.routers.stabuilding_com.tls=true
       - traefik.http.routers.stabuilding_com.tls.certresolver=cloudflare-dp
       - traefik.http.routers.stabuilding_com.entrypoints=websecure
-      - traefik.http.routers.stabuilding_com.rule=(Host(`stabuilding.com`) || Host(`stabuilding.com`))
+      - traefik.http.routers.stabuilding_com.rule=Host(`stabuilding.com`) || Host(`www.stabuilding.com`)
       - traefik.http.routers.stabuilding_com.service=stabuilding-service
       - traefik.http.services.stabuilding-service.loadbalancer.server.port=80
 
