@@ -67,33 +67,43 @@ resource "cloudflare_dns_record" "cname_mail_monikanova" {
   type    = "CNAME"
   ttl     = "600"
 }
-resource "cloudflare_dns_record" "txt_DKIM1" {
-  zone_id = cloudflare_zone.monikanova_com.id
-  content = "\"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5t1fv22Wh7bIkMyJpWJ9tIAgkLICKAKBs8zy7I7qQKZhwAfhV6/OVvf90w19QrTnpWY9PPzgZ+4uc6tlraYAN61BYgfkk9/q6oaZbjZiEsshQLbSFlzYDG7mHPySrtmRuBFteqPytNxZ00pMMxEv63YO7ExNrtLtFHBxMGhY3gsleaphluocJZ8JpKpH7UbYzk8Cu0jNnkHQp5elIwUAARCiT60JE/G32/Q//dLKQBYFF3tRl7KbzkamLar1h/nWINlukJwfyVNweuTt8S1JA7jaM6Buh67c3eNu3ZgQGCN7XKIGWGaGJnK5xhTXoQnG8b+2tVyybk6VlQGBL2McQIDAQAB;\"" #TXT must be surrounded with ""
-  name    = "default._domainkey"
-  proxied = false
-  type    = "TXT"
-  ttl     = "600"
-}
-resource "cloudflare_dns_record" "txt_o" {
-  zone_id = cloudflare_zone.monikanova_com.id
-  content = "\"o=-\"" #TXT must be surrounded with ""
-  name    = "_domainkey"
-  proxied = false
-  type    = "TXT"
-  ttl     = "600"
-}
-resource "cloudflare_dns_record" "txt_DMARC" {
-  zone_id = cloudflare_zone.monikanova_com.id
-  content = "\"v=DMARC1; p=quarantine; adkim=s; aspf=s\"" #TXT must be surrounded with ""
-  name    = "_dmarc"
-  proxied = false
-  type    = "TXT"
-  ttl     = "600"
-}
+# Old loading.es DKIM - commented out for ABV migration
+#resource "cloudflare_dns_record" "txt_DKIM1" {
+#  zone_id = cloudflare_zone.monikanova_com.id
+#  content = "\"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5t1fv22Wh7bIkMyJpWJ9tIAgkLICKAKBs8zy7I7qQKZhwAfhV6/OVvf90w19QrTnpWY9PPzgZ+4uc6tlraYAN61BYgfkk9/q6oaZbjZiEsshQLbSFlzYDG7mHPySrtmRuBFteqPytNxZ00pMMxEv63YO7ExNrtLtFHBxMGhY3gsleaphluocJZ8JpKpH7UbYzk8Cu0jNnkHQp5elIwUAARCiT60JE/G32/Q//dLKQBYFF3tRl7KbzkamLar1h/nWINlukJwfyVNweuTt8S1JA7jaM6Buh67c3eNu3ZgQGCN7XKIGWGaGJnK5xhTXoQnG8b+2tVyybk6VlQGBL2McQIDAQAB;\"" #TXT must be surrounded with ""
+#  name    = "default._domainkey"
+#  proxied = false
+#  type    = "TXT"
+#  ttl     = "600"
+#}
+#resource "cloudflare_dns_record" "txt_o" {
+#  zone_id = cloudflare_zone.monikanova_com.id
+#  content = "\"o=-\"" #TXT must be surrounded with ""
+#  name    = "_domainkey"
+#  proxied = false
+#  type    = "TXT"
+#  ttl     = "600"
+#}
+# DMARC commented out until ABV DKIM is configured
+#resource "cloudflare_dns_record" "txt_DMARC" {
+#  zone_id = cloudflare_zone.monikanova_com.id
+#  content = "\"v=DMARC1; p=quarantine; adkim=s; aspf=s\"" #TXT must be surrounded with ""
+#  name    = "_dmarc"
+#  proxied = false
+#  type    = "TXT"
+#  ttl     = "600"
+#}
+#resource "cloudflare_dns_record" "txt_spf" {
+#  zone_id = cloudflare_zone.monikanova_com.id
+#  content = "\"v=spf1 include:_spf.loading.es -all\""
+#  name    = "@"
+#  proxied = false
+#  type    = "TXT"
+#  ttl     = "600"
+#}
 resource "cloudflare_dns_record" "txt_spf" {
   zone_id = cloudflare_zone.monikanova_com.id
-  content = "\"v=spf1 include:_spf.loading.es -all\""
+  content = "\"v=spf1 ip4:194.153.145.0/24 ~all\""
   name    = "@"
   proxied = false
   type    = "TXT"
@@ -107,9 +117,36 @@ resource "cloudflare_dns_record" "txt_google" {
   type    = "TXT"
   ttl     = "600"
 }
+#resource "cloudflare_dns_record" "mx_10" {
+#  zone_id  = cloudflare_zone.monikanova_com.id
+#  content  = "mx1.loading.es."
+#  name     = "@"
+#  proxied  = false
+#  type     = "MX"
+#  priority = "10"
+#  ttl      = "600"
+#}
+#resource "cloudflare_dns_record" "mx_20" {
+#  zone_id  = cloudflare_zone.monikanova_com.id
+#  content  = "mx2.loading.es."
+#  name     = "@"
+#  proxied  = false
+#  type     = "MX"
+#  priority = "20"
+#  ttl      = "600"
+#}
+#resource "cloudflare_dns_record" "mx_30" {
+#  zone_id  = cloudflare_zone.monikanova_com.id
+#  content  = "mx3.loading.es."
+#  name     = "@"
+#  proxied  = false
+#  type     = "MX"
+#  priority = "30"
+#  ttl      = "600"
+#}
 resource "cloudflare_dns_record" "mx_10" {
   zone_id  = cloudflare_zone.monikanova_com.id
-  content  = "mx1.loading.es."
+  content  = "appsmx1.abv.bg"
   name     = "@"
   proxied  = false
   type     = "MX"
@@ -118,19 +155,18 @@ resource "cloudflare_dns_record" "mx_10" {
 }
 resource "cloudflare_dns_record" "mx_20" {
   zone_id  = cloudflare_zone.monikanova_com.id
-  content  = "mx2.loading.es."
+  content  = "appsmx2.abv.bg"
   name     = "@"
   proxied  = false
   type     = "MX"
   priority = "20"
   ttl      = "600"
 }
-resource "cloudflare_dns_record" "mx_30" {
-  zone_id  = cloudflare_zone.monikanova_com.id
-  content  = "mx3.loading.es."
-  name     = "@"
-  proxied  = false
-  type     = "MX"
-  priority = "30"
-  ttl      = "600"
+resource "cloudflare_dns_record" "cname_abv_mail_monikanova" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  content = "abv.bg"
+  name    = "abv-765fdfb078daebae417d84701536.monikanova.com"
+  proxied = false
+  type    = "CNAME"
+  ttl     = "600"
 }
