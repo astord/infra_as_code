@@ -84,7 +84,7 @@ resource "cloudflare_dns_record" "cname_mail_monikanova" {
 #  type    = "TXT"
 #  ttl     = "600"
 #}
-# DMARC commented out until ABV DKIM is configured
+# Old strict DMARC - commented out until ABV DKIM is configured
 #resource "cloudflare_dns_record" "txt_DMARC" {
 #  zone_id = cloudflare_zone.monikanova_com.id
 #  content = "\"v=DMARC1; p=quarantine; adkim=s; aspf=s\"" #TXT must be surrounded with ""
@@ -93,6 +93,14 @@ resource "cloudflare_dns_record" "cname_mail_monikanova" {
 #  type    = "TXT"
 #  ttl     = "600"
 #}
+resource "cloudflare_dns_record" "txt_DMARC" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  content = "\"v=DMARC1; p=none; adkim=r; aspf=r\""
+  name    = "_dmarc"
+  proxied = false
+  type    = "TXT"
+  ttl     = "600"
+}
 #resource "cloudflare_dns_record" "txt_spf" {
 #  zone_id = cloudflare_zone.monikanova_com.id
 #  content = "\"v=spf1 include:_spf.loading.es -all\""
