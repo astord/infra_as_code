@@ -1,6 +1,7 @@
-Docs: https://github.com/pi-hole/docker-pi-hole
+**URL**: https://pihole.ast/admin/
 
-http://pihole.ast/admin/
+Docs: https://github.com/pi-hole/docker-pi-hole
+https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/
 
 ---
 
@@ -23,7 +24,7 @@ Backup/restore is done from web interface: https://pihole.ast/admin/settings/tel
 
 ```
 #List all images related to pihole
-docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/cloudflared'
+docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/cloudflared' --filter=reference='klutchell/dnscrypt-proxy'
 ```
 
 **If during update problems with DNS resolution appear
@@ -32,14 +33,15 @@ change (temporarly) the merlin router DNS settings LAN -> DNS Director -> Enable
 ```
 #Tag the old images:
 docker tag pihole/pihole:latest pihole/pihole:vX.0
-docker tag cloudflare/cloudflared:latest cloudflare/cloudflared:vX.0
-#Pull the latest cloudflared image:
+docker tag klutchell/dnscrypt-proxy:latest klutchell/dnscrypt-proxy:vX.0
+#Pull the latest images:
 docker compose pull
 #Replace the running container
 docker compose down
 docker compose up -d
-#Remove the left public pihole image:
-docker rmi pihole/pihole:vX.0
+#Remove the left public pihole images:
+docker rmi pihole/pihole:20XY.Z.W
+docker rmi klutchell/dnscrypt-proxy:vX.0
 ```
 
 # Remove

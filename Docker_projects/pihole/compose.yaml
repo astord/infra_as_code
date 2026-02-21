@@ -1,16 +1,15 @@
 services:
-  cloudflared:
-    container_name: cloudflared
-    image: cloudflare/cloudflared:latest
+  dnscrypt-proxy:
+    container_name: dnscrypt-proxy
+    image: klutchell/dnscrypt-proxy:latest
     restart: unless-stopped
-    command: proxy-dns
-
-    # See the list of environment variables at https://github.com/cloudflare/cloudflared/blob/master/cmd/cloudflared/proxydns/cmd.go
-    environment:
-      TUNNEL_DNS_UPSTREAM: "https://8.8.8.8/dns-query"
-      TUNNEL_DNS_PORT: 5053
-      # Listen on all interfaces
-      TUNNEL_DNS_ADDRESS: "0.0.0.0"
+    #It takes ~10 seconds of dnscrypt-proxy to load all servers, bellow is needed
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/dnsprobe", "cloudflare.com", "127.0.0.1:5053"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
     networks:
       docker_ipvlan:
         ipv4_address: 10.1.0.12
@@ -18,7 +17,7 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     depends_on:
-      - cloudflared #boot after cloudflared
+      - dnscrypt-proxy #boot after dnscrypt-proxy
     environment:
       TZ: 'Europe/Sofia'
       FTLCONF_webserver_api_password: ${WEBPASSWORD}
@@ -29,7 +28,7 @@ services:
       #FTLCONF_WHITELIST: "s.youtube.com"
       FTLCONF_dns_rateLimit_count: 0
       FTLCONF_dns_rateLimit_interval: 0  
-      FTLCONF_DNS_HOSTS: 10.1.0.3 xerox.ast;10.1.0.7 debhol-cadvisor.ast;10.1.0.8 debhol-metrics.ast;10.1.0.10 debhol.ast;10.1.0.11 pihole.ast;10.1.0.20 ol-storage.ast;10.1.0.24 grafana.ast;10.1.0.25 prom-2y.ast;10.1.0.26 prom-1m.ast;10.1.0.27 alertmanager.ast;10.1.0.28 smokeping.ast;10.1.0.29 plex.ast;10.1.0.50 x1.ast;10.1.0.51 t590.ast;10.1.0.52 galaxy-a51.ast;10.1.0.53 huawei-p40.ast;10.1.0.55 laptop-ol.ast;10.1.0.56 ana-lenovo.ast;10.1.0.57 galaxy-s24.ast;10.1.0.58 galaxy-a40.ast;10.1.0.1 merlin.ast
+      FTLCONF_DNS_HOSTS: 10.1.0.3 xerox.ast;10.1.0.4 rpisensor.ast;10.1.0.7 debhol-cadvisor.ast;10.1.0.8 debhol-metrics.ast;10.1.0.10 debhol.ast;10.1.0.11 pihole.ast;10.1.0.20 ol-storage.ast;10.1.0.24 grafana.ast;10.1.0.25 prom-2y.ast;10.1.0.26 prom-1m.ast;10.1.0.27 alertmanager.ast;10.1.0.28 smokeping.ast;10.1.0.29 plex.ast;10.1.0.50 x1.ast;10.1.0.51 t590.ast;10.1.0.52 galaxy-a51.ast;10.1.0.53 huawei-p40.ast;10.1.0.55 laptop-ol.ast;10.1.0.56 ana-lenovo.ast;10.1.0.57 galaxy-s24.ast;10.1.0.58 galaxy-a40.ast;10.1.0.1 merlin.ast
     restart: unless-stopped
     networks:
       docker_ipvlan:
