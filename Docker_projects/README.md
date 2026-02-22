@@ -15,9 +15,14 @@ IP | hostname | URL
 10.1.0.17 | stabuilding-web
 10.1.0.20 | samba
 10.1.0.23 | nfs
-10.1.0.24 | grafana
-10.1.0.25 | prom-2y
-10.1.0.26 | prom-1m
+10.1.0.24 | grafana         | http://grafana.ast:3000/
+10.1.0.25 | prom-2y         | http://prom-2y.ast:9090/
+10.1.0.26 | prom-1m         | http://prom-1m.ast:9090/
 10.1.0.27 | alertnamager
 10.1.0.28 | smokeping       | http://smokeping.ast/smokeping/
 10.1.0.29 | plex            | http://plex.ast:32400/web
+
+# Other hosts
+IP | hostname | URL
+---|---|---
+10.1.0.4  | rpisensor pi 4 | http://rpisensor.ast:8080, http://10.1.0.4:8080/metrics, http://10.1.0.4:8080/sensors
