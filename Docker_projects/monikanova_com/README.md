@@ -35,7 +35,7 @@ docker rmi mariadb:....
 ###Create the backup tar
 docker exec $(docker ps -q --filter "name=monikanova-wp-1") tar czf /tmp/wp_backup-$(date -I).tar.gz -C /var/www/html .
 
-###Copy the backup tar from the container to the host /tmp/wp_test_backup
+###Copy the backup tar from the container to the host /tmp/wp_test_backups
 mkdir -p /tmp/wp-backups/
 docker cp $(docker ps -q --filter "name=monikanova-wp-1"):/tmp/wp_backup-$(date -I).tar.gz /tmp/wp-backups/
 
@@ -46,7 +46,7 @@ docker exec $(docker ps -q --filter "name=monikanova-wp-1") rm -rf /tmp/wp_backu
 ## 2. Database backup stored to the host
 
 ```
-mkdir -p /tmp/wp-backup
+mkdir -p /tmp/wp-backups
 source .env
 docker exec $(docker ps -q --filter "name=monikanova-db-1") mysqldump -u wordpress -p$DB_PASS wordpress > /tmp/wp-backups/wp-db-backup-$(date -I).sql
 ```

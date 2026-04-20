@@ -7,5 +7,6 @@ Docker_projects/smokeping/config/
 **/*privkey.pem
 Docker_projects/prodanov_org_temp/certs
 **/*acme.json
+**/*acme.json.bak
 **/ssh_key/id_rsa
 **/content

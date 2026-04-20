@@ -1,6 +1,6 @@
 services:
   traefik-proxy:
-    image: traefik:v3.3
+    image: traefik:v3.6
     container_name: traefik-proxy
     restart: unless-stopped
     depends_on:

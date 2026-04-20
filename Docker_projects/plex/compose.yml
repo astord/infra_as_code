@@ -10,6 +10,7 @@ services:
       - VERSION=docker
     volumes:
       - /data/ol_storage/HDD400/Downloads:/movies
+      - /data/ol_storage/HDD400/TV:/pictures
       - plex_library:/config
     devices:
       - /dev/dri:/dev/dri
