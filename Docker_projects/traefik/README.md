@@ -7,6 +7,7 @@ docker images --filter=reference='traefik' --filter=reference='tecnativa/docker-
 # Tag the old images:
 
 only for docker-socket-proxy we are with the `latest` tag. traefic is with fixed tag so there update the compose.yml file.
+If the current version in compose.yml is abandoned, you need to switch to a new version. If still up to date, the bellow prcedure will push the most recent current tag from hub.docker.com
 ```
 docker tag tecnativa/docker-socket-proxy:latest tecnativa/docker-socket-proxy:vX.0
 ```

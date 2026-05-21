@@ -15,6 +15,7 @@ RUN apk --no-cache upgrade && apk --no-cache add samba samba-common-tools
 RUN mkdir /config /shared1 /shared2
 
 # Create a Samba user "guest"
+ARG SMB_PASS
 RUN echo -e "${SMB_PASS}\n${SMB_PASS}" | smbpasswd -a -s guest && \
     smbpasswd -e guest
 

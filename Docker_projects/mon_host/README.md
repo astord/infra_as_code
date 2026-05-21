@@ -16,11 +16,11 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 ### List the current images
 
 ```
-docker images --filter=reference='prom/node-exporter' --filter=reference='gcr.io/cadvisor/cadvisor'
+docker images --filter=reference='prom/node-exporter' --filter=reference='gcr.io/cadvisor/cadvisor' --filter=reference='ghcr.io/google/cadvisor'
 ```
 
 ### cadvisor update
-Check the latest release version for gcr.io/cadvisor/cadvisor:v0.52.1 image from https://github.com/google/cadvisor/releases
+Check the latest release version for gcr.io/cadvisor/cadvisor:v0.52.1 image from https://github.com/google/cadvisor/pkgs/container/cadvisor
 If there is a new image:
 - put the new version inside the `compose.yml` file
 - `docker compose up -d --no-deps`

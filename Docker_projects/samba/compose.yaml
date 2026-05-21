@@ -2,7 +2,10 @@ name: "samba" #Compose project name.
 services:
   smb:        #container name
     image: smb:latest
-    build: .
+    build:
+       context: .
+       args:
+         SMB_PASS: ${SMB_PASS}
     restart: always
     volumes:
       - /infra/git/infra_as_code/Docker_projects/samba:/config
