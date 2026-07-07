@@ -26,7 +26,8 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      - traefik.http.routers.monikanova.rule=Host(`monikanova.com`)
+      #- traefik.http.routers.monikanova.rule=Host(`monikanova.com`)
+      - traefik.http.routers.monikanova.rule=Host(`monikanova.com`) || Host(`admin.monikanova.com`)
       - traefik.http.routers.monikanova.tls.certresolver=cloudflare-dp
       - traefik.http.routers.monikanova.entrypoints=websecure
       - traefik.http.routers.monikanova.tls=true
