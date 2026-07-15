@@ -26,8 +26,7 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      #- traefik.http.routers.monikanova.rule=Host(`monikanova.com`)
-      - traefik.http.routers.monikanova.rule=Host(`monikanova.com`) || Host(`admin.monikanova.com`)
+      - traefik.http.routers.monikanova.rule=Host(`monikanova.com`)
       - traefik.http.routers.monikanova.tls.certresolver=cloudflare-dp
       - traefik.http.routers.monikanova.entrypoints=websecure
       - traefik.http.routers.monikanova.tls=true
@@ -41,12 +40,6 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_CACHE', true);
         define('WP_MEMORY_LIMIT', '256M');
-        // Stable, self-contained admin door. When reached via the admin subdomain,
-        // force home/siteurl to that host so WordPress never canonically redirects to admin subdomain
-        if (isset($$_SERVER['HTTP_HOST']) && $$_SERVER['HTTP_HOST'] === 'admin.monikanova.com') {
-            define('WP_HOME', 'https://admin.monikanova.com');
-            define('WP_SITEURL', 'https://admin.monikanova.com');
-        }
     dns: # not 10.1.0.11 because not to depend ot this internal DNS
       - 8.8.8.8
       - 1.1.1.1

@@ -48,7 +48,7 @@ resource "cloudflare_dns_record" "a_ipv6" {
   ttl     = "600"
 }
 resource "cloudflare_dns_record" "cname_monikanova" {
-  for_each = toset(["lists", "autoconfig", "autodiscover", "www", "ftp", "admin"])
+  for_each = toset(["lists", "autoconfig", "autodiscover", "www", "ftp"])
 
   zone_id = cloudflare_zone.monikanova_com.id
   content = "monikanova.com"
