@@ -1,7 +1,7 @@
 resource "cloudflare_dns_record" "monikanova" {
   zone_id = cloudflare_zone.monikanova_com.id
   comment = "main record"
-  content = var.public_ip_bg
+  content = var.public_ip_netlify
   name    = "monikanova.com"
   proxied = false
   type    = "A"
@@ -11,7 +11,7 @@ resource "cloudflare_dns_record" "a_ipv4" {
   for_each = toset(["ipv4"])
 
   zone_id = cloudflare_zone.monikanova_com.id
-  content = var.public_ip_bg
+  content = var.public_ip_netlify
   name    = each.key
   proxied = false
   type    = "A"
@@ -48,10 +48,10 @@ resource "cloudflare_dns_record" "a_ipv6" {
   ttl     = "600"
 }
 resource "cloudflare_dns_record" "cname_monikanova" {
-  for_each = toset(["lists", "autoconfig", "autodiscover", "www", "ftp"])
+  for_each = toset(["lists", "autoconfig", "autodiscover", "www"])
 
   zone_id = cloudflare_zone.monikanova_com.id
-  content = "monikanova.com"
+  content = "monikanova.netlify.app"
   name    = each.key
   proxied = false
   type    = "CNAME"
