@@ -178,3 +178,12 @@ resource "cloudflare_dns_record" "cname_abv_mail_monikanova" {
   type    = "CNAME"
   ttl     = "600"
 }
+resource "cloudflare_dns_record" "admin_monikanova" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  comment = "admin record"
+  content = var.public_ip_bg
+  name    = "admin.monikanova.com"
+  proxied = false
+  type    = "A"
+  ttl     = 300
+}

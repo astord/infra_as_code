@@ -15,3 +15,7 @@ variable "public_ip_netlify" {
   type    = string
   default = "75.2.60.5"
 }
+
+variable "public_ip_bg" {
+  type = string
+}
