@@ -1,7 +1,7 @@
 # Upgrade
 ## List all images related to pihole
 ```
-docker images --filter=reference='traefik' --filter=reference='tecnativa/docker-socket-proxy'
+docker images --filter=reference='traefik' --filter=reference='tecnativa/docker-socket-proxy' --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 # Tag the old images:

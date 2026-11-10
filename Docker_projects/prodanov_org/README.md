@@ -1,19 +1,16 @@
 # Updates
 # check the images
-docker images --filter=reference=ubuntu --filter=reference=ubuntu_ssh_scp --filter=reference=nginx
+docker images --filter=reference=ubuntu --filter=reference=ubuntu_ssh_scp --filter=reference=nginx --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 
-# Tag the current images
+# Tag the current images BEFORE pulling/building (rollback copies)
 docker tag nginx:latest nginx:vX
 docker tag ubuntu_ssh_scp:latest ubuntu_ssh_scp:vX
-docker tag ubuntu:latest ubuntu:vX
 
-# Pull the latest
-docker pull ubuntu:latest
-docker pull nginx:latest
+# Pull the latest nginx (only "web": the scp image is built locally, not on Docker Hub)
+docker compose pull web
 
-# Build
-docker compose down scp
-docker compose build scp
+# Rebuild the scp image from the newest ubuntu base, re-running apt-get
+docker compose build --pull --no-cache scp
 
-# Start
+# Recreate whatever changed
 docker compose up -d && sleep 2 && docker compose ps

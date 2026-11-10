@@ -13,6 +13,11 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 
 `vX.Y` bellow is the incremented version of the `latest` image.
 
+## Check the images:
+```
+docker images nfs --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
+```
+
 ```
 #Tag the old image:
 docker tag nfs:latest nfs:vX.0

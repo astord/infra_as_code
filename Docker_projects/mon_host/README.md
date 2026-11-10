@@ -16,7 +16,8 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 ### List the current images
 
 ```
-docker images --filter=reference='prom/node-exporter' --filter=reference='gcr.io/cadvisor/cadvisor' --filter=reference='ghcr.io/google/cadvisor'
+docker images --filter=reference='prom/node-exporter' --filter=reference='gcr.io/cadvisor/cadvisor' --filter=reference='ghcr.io/google/cadvisor' \
+ --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 ### cadvisor update
