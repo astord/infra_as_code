@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y openssh-server
 # Configure SSH
-RUN mkdir /var/run/sshd
+RUN mkdir -p /var/run/sshd
 #RUN echo 'root:parola' | chpasswd
 COPY ./ssh_key/id_rsa.pub /root/.ssh/authorized_keys
 #password for user login
