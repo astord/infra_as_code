@@ -1,6 +1,9 @@
 # references
 https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/wordpress/README.md
 
+## Wordpress admin page
+https://admin.monikanova.com/wp-login
+
 # Clean all
 
 ```
@@ -11,7 +14,7 @@ docker compose down --volumes --rmi all
 List current images:
 
 ```
-docker images --filter=reference=wordpress --filter=reference=mariadb
+docker images --filter=reference=wordpress --filter=reference=mariadb --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 ```
@@ -25,6 +28,7 @@ docker compose down && sleep 1 && docker compose up -d && docker compose ps
 docker rmi wordpress:vX.0
 docker rmi mariadb:....
 ```
+When the updated container starts, it copies WordPress from the image into /var/www/html only if that folder has no WordPress yet. So it will load the old version of the wordpress, and this has to be updated manually from the web UI
 
 
 # Bakcup and Restore

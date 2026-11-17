@@ -9,6 +9,10 @@ docker network create -d ipvlan --subnet 10.1.0.0/24 --gateway 10.1.0.1 -o paren
 ## Updates/Upgrades
 
 ```
+docker images lscr.io/linuxserver/smokeping --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
+```
+
+```
 cd <project_dir>
 docker tag prom/alertmanager:latest prom/alertmanager:vX.0 # tag the old image in case of revert is needed
 docker compose pull                                        # pulls the latest images

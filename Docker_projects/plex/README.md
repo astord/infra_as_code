@@ -25,7 +25,7 @@ docker volume create plex_library
 ## Check the current images
 
 ```
-docker images lscr.io/linuxserver/plex
+docker images lscr.io/linuxserver/plex --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 ## Patching

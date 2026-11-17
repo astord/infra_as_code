@@ -27,7 +27,7 @@ docker volume create smokeping_data
 ## Check the current images
 
 ```
-docker images lscr.io/linuxserver/smokeping
+docker images lscr.io/linuxserver/smokeping --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 ## Patching

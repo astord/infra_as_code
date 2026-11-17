@@ -24,7 +24,8 @@ Backup/restore is done from web interface: https://pihole.ast/admin/settings/tel
 
 ```
 #List all images related to pihole
-docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/cloudflared' --filter=reference='klutchell/dnscrypt-proxy'
+docker images --filter=reference='pihole/pihole' --filter=reference='cloudflare/cloudflared' --filter=reference='klutchell/dnscrypt-proxy' \
+ --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.CreatedAt}}\t{{.Size}}"
 ```
 
 **If during update problems with DNS resolution appear
@@ -39,6 +40,8 @@ docker compose pull
 #Replace the running container
 docker compose down
 docker compose up -d
+#Check the pihole blocking lists are available (https://pihole.ast/admin/groups/lists). If no, run this to download them:
+docker exec pihole pihole -g
 #Remove the left public pihole images:
 docker rmi pihole/pihole:20XY.Z.W
 docker rmi klutchell/dnscrypt-proxy:vX.0
