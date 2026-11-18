@@ -187,3 +187,50 @@ resource "cloudflare_dns_record" "admin_monikanova" {
   type    = "A"
   ttl     = 300
 }
+
+# systeme.io - escuela.monikanova.com site (CloudFront) and its ACM certificate validation.
+# Must stay DNS only (proxied = false), otherwise ACM validation and CloudFront TLS break.
+resource "cloudflare_dns_record" "cname_systeme_escuela" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  comment = "systeme.io escuela site"
+  content = "d3ufwxza5ccfum.cloudfront.net"
+  name    = "escuela"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 600
+}
+resource "cloudflare_dns_record" "cname_systeme_escuela_acm" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  comment = "systeme.io escuela ACM certificate validation"
+  content = "_1bb9f03a605fdffd927067e8496b4d7e.wzccmgtwzk.acm-validations.aws"
+  name    = "_077cb6a25fa9ca37ea91e0e06a251365.escuela"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 600
+}
+
+# systeme.io - email sending authentication for @monikanova.com
+# si<id> = return-path (SPF + bounces), systemeio1/2 = DKIM keys hosted by systeme.io
+resource "cloudflare_dns_record" "cname_systeme_return_path" {
+  zone_id = cloudflare_zone.monikanova_com.id
+  comment = "systeme.io return-path (SPF + bounces)"
+  content = "inbound.systeme.io"
+  name    = "si19252158"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 600
+}
+resource "cloudflare_dns_record" "cname_systeme_dkim" {
+  for_each = {
+    "systemeio1._domainkey" = "key1.systeme.io"
+    "systemeio2._domainkey" = "key2.systeme.io"
+  }
+
+  zone_id = cloudflare_zone.monikanova_com.id
+  comment = "systeme.io DKIM"
+  content = each.value
+  name    = each.key
+  proxied = false
+  type    = "CNAME"
+  ttl     = 600
+}
