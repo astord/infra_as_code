@@ -93,9 +93,11 @@ resource "cloudflare_dns_record" "cname_mail_monikanova" {
 #  type    = "TXT"
 #  ttl     = "600"
 #}
+# Value requested by systeme.io support to complete monikanova.com email authentication.
+# adkim/aspf dropped: relaxed (r) is the DMARC default, so alignment behaviour is unchanged.
 resource "cloudflare_dns_record" "txt_DMARC" {
   zone_id = cloudflare_zone.monikanova_com.id
-  content = "\"v=DMARC1; p=none; adkim=r; aspf=r\""
+  content = "\"v=DMARC1; p=none; rua=mailto:info@monikanova.com\""
   name    = "_dmarc"
   proxied = false
   type    = "TXT"
